@@ -27,6 +27,8 @@ export class DirectorRail extends HTMLElement {
         <div class="cell trig"><span class="k">Next hard trigger</span><span class="v" data-role="next">${nhText}</span></div>
         <button class="reached" data-role="reached">✓ Reached it</button>
         <button class="tray-btn" data-role="open-dice" aria-label="Dice">🎲</button>
+        <button class="tray-btn" data-role="open-npc" aria-label="NPC">👤</button>
+        <button class="tray-btn" data-role="open-art" aria-label="Art">✏️</button>
       </div>`;
 
     this.querySelector('[data-role=reached]').addEventListener('click', () => {
@@ -34,6 +36,12 @@ export class DirectorRail extends HTMLElement {
     });
     this.querySelector('[data-role=open-dice]').addEventListener('click', () => {
       this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'dice' }, bubbles: true }));
+    });
+    this.querySelector('[data-role=open-npc]').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'npc' }, bubbles: true }));
+    });
+    this.querySelector('[data-role=open-art]').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'art' }, bubbles: true }));
     });
   }
 }

@@ -3,6 +3,9 @@ import { initialClock, start, elapsedMs } from '../core/clock.js';
 import { nextUnreachedBeat } from '../core/timeline.js';
 import './director-rail.js';
 import './dice-tray.js';
+import './npc-tray.js';
+import './art-tray.js';
+import './prop-viewer.js';
 
 export class GmShell extends HTMLElement {
   constructor() {
@@ -12,15 +15,23 @@ export class GmShell extends HTMLElement {
     this.store = null;
     this.clockState = initialClock();
     this.stamps = {};
+    this.cast = [];
     this._tick = null;
   }
 
   connectedCallback() {
     this.innerHTML = `
       <director-rail></director-rail>
-      <main class="stage"><dice-tray hidden></dice-tray></main>`;
+      <main class="stage">
+        <dice-tray hidden></dice-tray>
+        <npc-tray hidden></npc-tray>
+        <art-tray hidden></art-tray>
+      </main>
+      <prop-viewer></prop-viewer>`;
     this.addEventListener('reached', () => this.onReached());
     this.addEventListener('open-tool', (e) => this.onOpenTool(e));
+    this.addEventListener('keep-npc', (e) => this.onKeepNpc(e));
+    this.addEventListener('show-prop', (e) => this.onShowProp(e));
   }
 
   loadScenario(scenario) {
@@ -28,6 +39,7 @@ export class GmShell extends HTMLElement {
     this.store = createStore(scenario.meta.id);
     this.clockState = this.store.get('clock', initialClock());
     this.stamps = this.store.get('stamps', {});
+    this.cast = this.store.get('cast', []);
     this.querySelector('dice-tray').systemId = scenario.meta.system;
     this.refresh();
   }
@@ -50,10 +62,22 @@ export class GmShell extends HTMLElement {
   }
 
   onOpenTool(e) {
-    if (e.detail?.tool === 'dice') {
-      const tray = this.querySelector('dice-tray');
-      tray.hidden = !tray.hidden;
-    }
+    const tool = e.detail?.tool;
+    const trays = { dice: 'dice-tray', npc: 'npc-tray', art: 'art-tray' };
+    if (!(tool in trays)) return;
+    const target = this.querySelector(trays[tool]);
+    const willShow = target.hidden;
+    for (const sel of Object.values(trays)) this.querySelector(sel).hidden = true;
+    target.hidden = !willShow;
+  }
+
+  onKeepNpc(e) {
+    this.cast = [...this.cast, e.detail];
+    this.store.set('cast', this.cast);
+  }
+
+  onShowProp(e) {
+    this.querySelector('prop-viewer').show(e.detail.src, e.detail.label);
   }
 
   refresh() {
