@@ -29,6 +29,7 @@ export class DirectorRail extends HTMLElement {
         <button class="tray-btn" data-role="open-dice" aria-label="Dice">🎲</button>
         <button class="tray-btn" data-role="open-npc" aria-label="NPC">👤</button>
         <button class="tray-btn" data-role="open-art" aria-label="Art">✏️</button>
+        <button class="tray-btn" data-role="open-clues" aria-label="Clues">🔍</button>
       </div>`;
 
     this.querySelector('[data-role=reached]').addEventListener('click', () => {
@@ -42,6 +43,9 @@ export class DirectorRail extends HTMLElement {
     });
     this.querySelector('[data-role=open-art]').addEventListener('click', () => {
       this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'art' }, bubbles: true }));
+    });
+    this.querySelector('[data-role=open-clues]').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'clues' }, bubbles: true }));
     });
   }
 }
