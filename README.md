@@ -65,7 +65,7 @@ Components are dumb renderers that emit events; the shell wires them together.
 | `src/components/dice-tray.js` | `<dice-tray>` — pack selector + die picker + roll + verdict |
 | `src/components/npc-tray.js` · `art-tray.js` · `prop-viewer.js` · `clue-net.js` | The tray tools |
 | `src/components/gm-shell.js` | `<gm-shell>` — root wiring + persistence |
-| `src/scenarios/` | Scenario data files (`afterimage.js`; `example-with-clues.js` is a template) |
+| `src/scenarios/` | Scenario data files (six Continuum slots: `afterimage`, `day-one`, `vain-crown`, `silvery-moon`, `chopper`, `princes-bride`; `example-with-clues.js` is a template); `index.js` is the registry |
 | `public/` | `manifest.webmanifest`, `sw.js` (offline service worker) |
 
 ## Scenario data model
@@ -96,8 +96,8 @@ compress if you reach a beat behind schedule.
 2. **Slice 2** — NPC generator (offline genre tables) + art generator (offline pencil-art library). ✅
 3. **Slice 3** — dice rule-packs (CoC d100, VANITY d6-pool, Panic & Glory, Dee Sanction) + tray pack selector. ✅
 4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks). ✅
-5. **Slice 5** — the convention **hub** (all slots, live "live now / up next / done", deep-links into each scenario). ✅
-6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; scenario porting from the Continuum docs; real slot start-times for the hub; markdown → scenario-data generator; native iPad wrapper.
+5. **Slice 5** — the convention **hub** (all slots, live "live now / up next / done", deep-links into each scenario). ✅ All **six** Continuum 2026 slots ported and scheduled with real times.
+6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; porting the scenarios' clue trails / cast into the data model; a dedicated BRP dice pack (Day One currently borrows the d100 pack); markdown → scenario-data generator; native iPad wrapper.
 
 ## Docs
 

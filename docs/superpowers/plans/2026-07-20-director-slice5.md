@@ -42,8 +42,17 @@ jsdom. No new dependencies. Fully offline.
 - `npm test` → 122 passing (34 files); build succeeds (35 modules). Manual: hub renders the Continuum
   slate, "Open" deep-links AFTERIMAGE into a live Rail session, 🏠 returns to the hub. Console clean.
 
-## Deferred (backlog, not this slice)
+## Follow-up (completed after the slice)
 
-- Real slot **start times** for Continuum 2026 (add each `startsAt` to light up live/up-next).
-- Porting the four remaining scenarios (Day One, Vain Crown, Another Fine Mess, Prince's Bride) into
-  scenario modules + registering them (then flip each slot's `scenarioId`).
+- **All six Continuum 2026 slots ported + scheduled.** `continuum-2026.js` rewritten from the
+  authoritative `con-desk.html` SLOTS array (real days/times/systems), every `startsAt` set so
+  live/up-next is live. Five new scenario modules (`day-one`, `vain-crown`, `silvery-moon`,
+  `chopper`, `princes-bride`) transcribe their timelines from the existing gm-utility consoles and
+  are registered; `tests/con/continuum-2026.test.js` guards resolvability + schedule.
+  - Correction found while porting: the real slate is **six** slots (Slot 5 *Silvery Moon* was
+    missing from the first hub draft), and "Another Fine Mess" is *Get to the Chopper — Another Fine Mess*.
+
+## Still deferred (backlog)
+
+- Porting each scenario's **clue trails / cast** into the data model (shipped `clues: []` like AFTERIMAGE).
+- A dedicated **BRP** dice pack — Day One currently borrows `coc-d100` (d100 roll-under).
