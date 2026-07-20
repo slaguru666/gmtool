@@ -55,7 +55,7 @@ Components are dumb renderers that emit events; the shell wires them together.
 | `src/dice/roller.js` | Seedable dice core (pools, modifiers) |
 | `src/dice/rulepacks/` | System interpreters (Year-Zero, CoC d100, BRP d100, VANITY d6, Panic & Glory, Dee Sanction) + registry |
 | `src/npc/` | NPC generator (`generator.js`) + genre table packs (`packs/noir.js`) |
-| `src/art/` | Pencil-art library search (`search.js`) + tagged manifest |
+| `src/art/` | Pencil-art library search (`search.js`) + tagged manifest; online `generate.js` (configurable endpoint) + `library.js` (persisted, capped generated-art cache) |
 | `src/clues/safety-net.js` | Clue safety-net engine (essential-gap + solvability) |
 | `src/con/schedule.js` | Pure convention-schedule analysis (live / up-next / done / upcoming) |
 | `src/components/con-hub.js` | `<con-hub>` — the convention landing screen; deep-links into a scenario |
@@ -130,7 +130,16 @@ not parsed; you write the structured markdown. The `tools/` directory is dev-onl
 3. **Slice 3** — dice rule-packs (CoC d100, VANITY d6-pool, Panic & Glory, Dee Sanction) + tray pack selector. ✅
 4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks). ✅
 5. **Slice 5** — the convention **hub** (all slots, live "live now / up next / done", deep-links into each scenario). ✅ All **six** Continuum 2026 slots ported and scheduled with real times.
-6. **Later** — online art "Generate"; native iPad wrapper. (All design §5 tray tools — dice, NPC, art, clue-net, cast, break timer, parking-lot, wake-lock — plus the markdown → scenario-data generator are built.)
+6. **Later** — native iPad wrapper. (Everything else in the design is built: all §5 tray tools — dice, NPC, art with online Generate, clue-net, cast, break timer, parking-lot, wake-lock — plus the con hub, six ported scenarios, and the markdown → scenario-data generator.)
+
+### Online art "Generate"
+
+The art tray can generate new pencil art at the table and cache it into the searchable library (offline
+thereafter). It needs a **GM-configured** image-gen endpoint — nothing is hardcoded and no key is baked
+in. Paste your endpoint URL into the tray's ⚙ field (persisted). The endpoint receives `POST { prompt }`
+and must reply JSON with an image under `image` | `src` | `url` | `dataUrl` (a `data:` URL makes the
+result offline-cacheable), plus optional `label` / `tags`. With no endpoint or no network the Generate
+button is disabled and the library stays fully searchable — the network is never load-bearing.
 
 ## Docs
 

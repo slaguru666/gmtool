@@ -91,6 +91,12 @@ jsdom. No new dependencies. Fully offline.
   / Clues / Cast lists) — not freeform-prose scraping. `tests/tools/scenario-md.test.js` (round-trip
   + validation); `tools/` is dev-only, never bundled.
 
+- **Online art "Generate" built.** `src/art/generate.js` (configurable endpoint, injectable fetch,
+  graceful offline/unconfigured degradation) + `src/art/library.js` (pure add/dedupe/cap) + art-tray
+  integration: prompt → configured endpoint → image cached into a persisted, searchable library
+  (`gmd.art.generated`, capped 24). No endpoint/key hardcoded — the GM pastes their gen URL. Tests:
+  `generate.test.js`, `library.test.js`, `art-tray-generate.test.js`. Network never load-bearing.
+
 ## Still deferred (backlog)
 
-- Online art "Generate" (needs wifi + a gen backend); native iPad wrapper.
+- Native iPad app wrapper (the only remaining design item; a side project).
