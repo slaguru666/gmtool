@@ -10,7 +10,7 @@ export class DirectorRail extends HTMLElement {
   update(patch) { Object.assign(this._state, patch); this.render(); }
 
   render() {
-    const { scenario, elapsedMs, stamps, paused } = this._state;
+    const { scenario, elapsedMs, stamps, paused, wakeActive } = this._state;
     if (!scenario) { this.innerHTML = `<div class="rail rail--empty">No scenario loaded</div>`; return; }
     const m = analyze(scenario.timeline, elapsedMs / 60000, stamps);
     const here = m.currentBeat ? m.currentBeat.label : (scenario.timeline[0]?.label ?? '—');
@@ -33,6 +33,8 @@ export class DirectorRail extends HTMLElement {
         <button class="tray-btn" data-role="open-clues" aria-label="Clues">🔍</button>
         <button class="tray-btn" data-role="open-cast" aria-label="Cast">👥</button>
         <button class="tray-btn" data-role="open-break" aria-label="Break timer">☕</button>
+        <button class="tray-btn" data-role="open-parking" aria-label="Parking-lot notes">📝</button>
+        <button class="tray-btn ${wakeActive ? 'on' : ''}" data-role="toggle-wake" aria-label="Keep screen awake" aria-pressed="${wakeActive ? 'true' : 'false'}">💡</button>
       </div>`;
 
     this.querySelector('[data-role=reached]').addEventListener('click', () => {
@@ -58,6 +60,12 @@ export class DirectorRail extends HTMLElement {
     });
     this.querySelector('[data-role=open-break]').addEventListener('click', () => {
       this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'break' }, bubbles: true }));
+    });
+    this.querySelector('[data-role=open-parking]').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'parking' }, bubbles: true }));
+    });
+    this.querySelector('[data-role=toggle-wake]').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('toggle-wake', { bubbles: true }));
     });
   }
 }

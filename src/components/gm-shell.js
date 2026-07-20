@@ -1,6 +1,7 @@
 import { createStore } from '../core/store.js';
 import { initialClock, start, pause, resume, elapsedMs, isRunning, isPaused } from '../core/clock.js';
 import { nextUnreachedBeat } from '../core/timeline.js';
+import { createWakeLock } from '../core/wake-lock.js';
 import './director-rail.js';
 import './dice-tray.js';
 import './npc-tray.js';
@@ -9,6 +10,7 @@ import './prop-viewer.js';
 import './clue-net.js';
 import './cast-tray.js';
 import './break-timer.js';
+import './parking-lot.js';
 import './con-hub.js';
 import { getScenario } from '../scenarios/index.js';
 
@@ -24,6 +26,8 @@ export class GmShell extends HTMLElement {
     this.cast = [];
     this.revealedClues = [];
     this.breakEndsAt = null;
+    this.parkingLot = [];
+    this.wakeLock = createWakeLock();
     this._tick = null;
   }
 
@@ -38,6 +42,7 @@ export class GmShell extends HTMLElement {
         <clue-net hidden></clue-net>
         <cast-tray hidden></cast-tray>
         <break-timer hidden></break-timer>
+        <parking-lot hidden></parking-lot>
       </main>
       <prop-viewer></prop-viewer>`;
     this.addEventListener('reached', () => this.onReached());
@@ -47,6 +52,9 @@ export class GmShell extends HTMLElement {
     this.addEventListener('toggle-clue', (e) => this.onToggleClue(e));
     this.addEventListener('start-break', (e) => this.onStartBreak(e));
     this.addEventListener('end-break', () => this.onEndBreak());
+    this.addEventListener('add-note', (e) => this.onAddNote(e));
+    this.addEventListener('remove-note', (e) => this.onRemoveNote(e));
+    this.addEventListener('toggle-wake', () => this.onToggleWake());
     this.addEventListener('open-scenario', (e) => this.onOpenScenario(e));
     this.addEventListener('open-hub', () => this.showHub());
   }
@@ -91,6 +99,8 @@ export class GmShell extends HTMLElement {
     net.revealed = this.revealedClues;
     this.querySelector('cast-tray').cast = this.scenario.cast || [];
     this.breakEndsAt = this.store.get('break', null);
+    this.parkingLot = this.store.get('parkingLot', []);
+    this.querySelector('parking-lot').notes = this.parkingLot;
     this.refresh();
   }
 
@@ -113,7 +123,7 @@ export class GmShell extends HTMLElement {
 
   onOpenTool(e) {
     const tool = e.detail?.tool;
-    const trays = { dice: 'dice-tray', npc: 'npc-tray', art: 'art-tray', clues: 'clue-net', cast: 'cast-tray', break: 'break-timer' };
+    const trays = { dice: 'dice-tray', npc: 'npc-tray', art: 'art-tray', clues: 'clue-net', cast: 'cast-tray', break: 'break-timer', parking: 'parking-lot' };
     if (!(tool in trays)) return;
     const target = this.querySelector(trays[tool]);
     const willShow = target.hidden;
@@ -159,6 +169,27 @@ export class GmShell extends HTMLElement {
     this.refresh();
   }
 
+  onAddNote(e) {
+    const text = e.detail?.text?.trim();
+    if (!text) return;
+    this.parkingLot = [...this.parkingLot, { at: this.elapsedMs(), text }];
+    this.store.set('parkingLot', this.parkingLot);
+    this.querySelector('parking-lot').notes = this.parkingLot;
+  }
+
+  onRemoveNote(e) {
+    const i = e.detail?.index;
+    if (i == null || i < 0 || i >= this.parkingLot.length) return;
+    this.parkingLot = this.parkingLot.filter((_, idx) => idx !== i);
+    this.store.set('parkingLot', this.parkingLot);
+    this.querySelector('parking-lot').notes = this.parkingLot;
+  }
+
+  async onToggleWake() {
+    await this.wakeLock.toggle();
+    this.refresh();
+  }
+
   refresh() {
     const paused = isPaused(this.clockState);
     this.querySelector('director-rail').update({
@@ -166,6 +197,7 @@ export class GmShell extends HTMLElement {
       elapsedMs: this.elapsedMs(),
       stamps: this.stamps,
       paused,
+      wakeActive: this.wakeLock.isActive(),
     });
     this.querySelector('break-timer').state = {
       onBreak: paused,

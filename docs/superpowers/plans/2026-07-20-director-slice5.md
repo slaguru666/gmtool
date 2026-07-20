@@ -79,6 +79,12 @@ jsdom. No new dependencies. Fully offline.
   persistence (`break` store key); the rail shows a ☕ on-break badge; `fmtCountdown` (M:SS) added to
   `format.js`. Tests: `break-timer.test.js`, `gm-shell-break.test.js` (incl. the drift-honesty case).
 
+- **Parking-lot note + wake-lock built.** `<parking-lot>` captures timestamped threads (session-time
+  stamp, persisted under `parkingLot`, 📝 chip). `src/core/wake-lock.js` is an injectable Screen Wake
+  Lock controller (re-acquires on foreground, graceful no-op where unsupported), toggled by a 💡 rail
+  chip that lights when active. Tests: `parking-lot.test.js`, `wake-lock.test.js`, `gm-shell-parking.test.js`,
+  `gm-shell-wake.test.js`. This completes every design §5 tray tool.
+
 ## Still deferred (backlog)
 
-- Parking-lot note + wake-lock tray tools; online art "Generate".
+- Online art "Generate"; markdown → scenario-data generator; native iPad wrapper.
