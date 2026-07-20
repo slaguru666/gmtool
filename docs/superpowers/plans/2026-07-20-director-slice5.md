@@ -97,6 +97,12 @@ jsdom. No new dependencies. Fully offline.
   (`gmd.art.generated`, capped 24). No endpoint/key hardcoded — the GM pastes their gen URL. Tests:
   `generate.test.js`, `library.test.js`, `art-tray-generate.test.js`. Network never load-bearing.
 
-## Still deferred (backlog)
+- **Native iPad wrapper scaffolded (Capacitor).** `capacitor.config.json` (webDir `dist`, appId
+  `uk.timevans.thedirector`, iOS safe-area/theme), `@capacitor/{core,cli,ios}` as devDependencies
+  (web app keeps zero runtime deps), `ios:add`/`ios:sync`/`ios:open` scripts, `main.js` skips the SW
+  under Capacitor, iOS `<meta>` hints, `.gitignore` for native build output, and
+  `docs/native-ipad-wrapper.md` (the Xcode + CocoaPods build guide). `tests/tools/capacitor-config.test.js`
+  guards the config. The actual iOS project generation/build needs a Mac with full Xcode + CocoaPods
+  (not available in this env) and is documented for the user to run.
 
-- Native iPad app wrapper (the only remaining design item; a side project).
+## Done — the design is fully built.

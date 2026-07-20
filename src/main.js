@@ -11,7 +11,11 @@ if (typeof document !== 'undefined' && document.querySelector('gm-shell')) {
   });
 }
 
-if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+// Register the service worker for the browser PWA. Skipped inside the native
+// iOS wrapper (Capacitor), where assets are already bundled locally and a SW
+// under the capacitor:// scheme is unnecessary and can conflict.
+const inCapacitor = typeof window !== 'undefined' && !!window.Capacitor?.isNativePlatform?.();
+if (!inCapacitor && typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').catch(() => {});
   });

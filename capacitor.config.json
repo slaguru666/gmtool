@@ -1,0 +1,14 @@
+{
+  "appId": "uk.timevans.thedirector",
+  "appName": "The Director",
+  "webDir": "dist",
+  "backgroundColor": "#0b0e13",
+  "ios": {
+    "contentInset": "always",
+    "backgroundColor": "#0b0e13",
+    "preferredContentMode": "mobile"
+  },
+  "server": {
+    "iosScheme": "capacitor"
+  }
+}

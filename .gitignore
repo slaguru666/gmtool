@@ -1,3 +1,14 @@
 .superpowers/
 node_modules/
 dist/
+
+# Capacitor native build output (the ios/ project itself is committed once generated,
+# but these generated/derived paths are not)
+/ios/App/App/public/
+/ios/App/Pods/
+/ios/App/output/
+/ios/App/build/
+/ios/DerivedData/
+/ios/capacitor-cordova-ios-plugins/
+*.xcuserstate
+.DS_Store

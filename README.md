@@ -130,7 +130,9 @@ not parsed; you write the structured markdown. The `tools/` directory is dev-onl
 3. **Slice 3** — dice rule-packs (CoC d100, VANITY d6-pool, Panic & Glory, Dee Sanction) + tray pack selector. ✅
 4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks). ✅
 5. **Slice 5** — the convention **hub** (all slots, live "live now / up next / done", deep-links into each scenario). ✅ All **six** Continuum 2026 slots ported and scheduled with real times.
-6. **Later** — native iPad wrapper. (Everything else in the design is built: all §5 tray tools — dice, NPC, art with online Generate, clue-net, cast, break timer, parking-lot, wake-lock — plus the con hub, six ported scenarios, and the markdown → scenario-data generator.)
+6. **Native iPad wrapper** — a Capacitor iOS shell around the PWA is scaffolded (config, scripts, integration). Generate + build it on a Mac with Xcode + CocoaPods: see [`docs/native-ipad-wrapper.md`](docs/native-ipad-wrapper.md). ✅ (config) / ⬜ (iOS build needs the toolchain)
+
+**The full design is now built.** All §5 tray tools (dice with 6 packs, NPC, art with online Generate, clue-net, cast, break timer, parking-lot, wake-lock), the con hub, six ported Continuum scenarios, the markdown → scenario-data generator, and the native-wrapper scaffold.
 
 ### Online art "Generate"
 
