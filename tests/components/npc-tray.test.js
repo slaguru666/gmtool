@@ -37,4 +37,14 @@ describe('<npc-tray>', () => {
     expect(detail).not.toBe(null);
     expect(detail.name).toBe(el.last.name);
   });
+
+  it('does not break when the seed contains quotes or angle brackets', () => {
+    el.rng = seq([0.0]);
+    el.querySelector('[data-role=seed]').value = 'the "doc" <guy>';
+    el.querySelector('[data-role=generate]').click();
+    // seed round-trips intact through the re-rendered input (escaping worked)
+    expect(el.querySelector('[data-role=seed]').value).toBe('the "doc" <guy>');
+    // card still renders a name
+    expect(el.querySelector('[data-role=npc-name]').textContent.length).toBeGreaterThan(0);
+  });
 });
