@@ -53,11 +53,15 @@ Components are dumb renderers that emit events; the shell wires them together.
 | `src/core/scenario.js` | Scenario validator |
 | `src/core/format.js` | Elapsed + drift display formatting |
 | `src/dice/roller.js` | Seedable dice core (pools, modifiers) |
-| `src/dice/rulepacks/` | System interpreters (`year-zero.js`) + registry |
-| `src/components/director-rail.js` | `<director-rail>` — the always-on pacing bar |
-| `src/components/dice-tray.js` | `<dice-tray>` — die picker + roll + verdict |
+| `src/dice/rulepacks/` | System interpreters (Year-Zero, CoC d100, VANITY d6, Panic & Glory, Dee Sanction) + registry |
+| `src/npc/` | NPC generator (`generator.js`) + genre table packs (`packs/noir.js`) |
+| `src/art/` | Pencil-art library search (`search.js`) + tagged manifest |
+| `src/clues/safety-net.js` | Clue safety-net engine (essential-gap + solvability) |
+| `src/components/director-rail.js` | `<director-rail>` — the always-on pacing bar (🎲 👤 ✏️ 🔍 chips) |
+| `src/components/dice-tray.js` | `<dice-tray>` — pack selector + die picker + roll + verdict |
+| `src/components/npc-tray.js` · `art-tray.js` · `prop-viewer.js` · `clue-net.js` | The tray tools |
 | `src/components/gm-shell.js` | `<gm-shell>` — root wiring + persistence |
-| `src/scenarios/` | Scenario data files (`afterimage.js`) |
+| `src/scenarios/` | Scenario data files (`afterimage.js`; `example-with-clues.js` is a template) |
 | `public/` | `manifest.webmanifest`, `sw.js` (offline service worker) |
 
 ## Scenario data model
@@ -85,11 +89,11 @@ compress if you reach a beat behind schedule.
 ## Roadmap
 
 1. **Slice 1** — shell + Director Rail + data model + dice engine (Year-Zero). ✅
-2. **Slice 2** — NPC generator (offline genre tables) + art generator (offline pencil-art library).
-3. **Slice 3** — more rule-packs + the remaining convention scenarios.
-4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks).
+2. **Slice 2** — NPC generator (offline genre tables) + art generator (offline pencil-art library). ✅
+3. **Slice 3** — dice rule-packs (CoC d100, VANITY d6-pool, Panic & Glory, Dee Sanction) + tray pack selector. ✅
+4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks). ✅
 5. **Slice 5** — the convention **hub** (all slots, live "up next / live now").
-6. **Later** — markdown → scenario-data generator; native iPad wrapper.
+6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; scenario porting from the Continuum docs; markdown → scenario-data generator; native iPad wrapper.
 
 ## Docs
 
