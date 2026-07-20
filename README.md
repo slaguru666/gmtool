@@ -91,6 +91,38 @@ export default {
 `meta.system` selects the dice rule-pack. `hardTrigger` marks immovable beats; `cutHint` is what to
 compress if you reach a beat behind schedule.
 
+### Generating a scenario from markdown
+
+Instead of hand-writing the module, author a scenario in a structured markdown file and generate it:
+
+```bash
+npm run gen:scenario -- input.md src/scenarios/my-scenario.js   # or omit the output path to print
+```
+
+The tool (`tools/scenario-md.js`, wrapped by `tools/md-to-scenario.mjs`) is a deterministic parser —
+frontmatter → `meta`, and `## Timeline` / `## Clues` / `## Cast` lists → the arrays. See
+[`tools/example-scenario.md`](tools/example-scenario.md) for the full format; in short:
+
+```markdown
+---
+id: my-scenario
+system: year-zero
+players: 4
+playMinutes: 210
+---
+## Timeline
+- [0] The opening beat {hard} #a1-open        ← [minutes] label, {hard}, optional #id
+- [35] Interview | cut: skip the tea ritual   ← | cut: … → cutHint
+## Clues
+- The door-cam face {essential} {act: Act One} | fallback: the monologue cards
+## Cast
+- MARY FLETCHER — Innkeeper; saw the watchers | secret: she saw Crowe sew
+```
+
+IDs are auto-slugged from the label/name when not pinned with `#id`. The output is validated against
+`validateScenario` before it is written. It emits app data only, not prose — freeform con docs are
+not parsed; you write the structured markdown. The `tools/` directory is dev-only (never bundled).
+
 ## Roadmap
 
 1. **Slice 1** — shell + Director Rail + data model + dice engine (Year-Zero). ✅
@@ -98,7 +130,7 @@ compress if you reach a beat behind schedule.
 3. **Slice 3** — dice rule-packs (CoC d100, VANITY d6-pool, Panic & Glory, Dee Sanction) + tray pack selector. ✅
 4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks). ✅
 5. **Slice 5** — the convention **hub** (all slots, live "live now / up next / done", deep-links into each scenario). ✅ All **six** Continuum 2026 slots ported and scheduled with real times.
-6. **Later** — online art "Generate"; markdown → scenario-data generator; native iPad wrapper. (All design §5 tray tools — dice, NPC, art, clue-net, cast, break timer, parking-lot, wake-lock — are built.)
+6. **Later** — online art "Generate"; native iPad wrapper. (All design §5 tray tools — dice, NPC, art, clue-net, cast, break timer, parking-lot, wake-lock — plus the markdown → scenario-data generator are built.)
 
 ## Docs
 

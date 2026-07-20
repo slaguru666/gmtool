@@ -85,6 +85,12 @@ jsdom. No new dependencies. Fully offline.
   chip that lights when active. Tests: `parking-lot.test.js`, `wake-lock.test.js`, `gm-shell-parking.test.js`,
   `gm-shell-wake.test.js`. This completes every design §5 tray tool.
 
+- **Markdown → scenario-data generator built.** `tools/scenario-md.js` (pure parse + emit) +
+  `tools/md-to-scenario.mjs` (CLI, `npm run gen:scenario`) turn a structured scenario markdown file
+  into a validated scenario module. Deterministic parser over a defined format (frontmatter + Timeline
+  / Clues / Cast lists) — not freeform-prose scraping. `tests/tools/scenario-md.test.js` (round-trip
+  + validation); `tools/` is dev-only, never bundled.
+
 ## Still deferred (backlog)
 
-- Online art "Generate"; markdown → scenario-data generator; native iPad wrapper.
+- Online art "Generate" (needs wifi + a gen backend); native iPad wrapper.
