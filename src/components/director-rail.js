@@ -31,6 +31,7 @@ export class DirectorRail extends HTMLElement {
         <button class="tray-btn" data-role="open-npc" aria-label="NPC">👤</button>
         <button class="tray-btn" data-role="open-art" aria-label="Art">✏️</button>
         <button class="tray-btn" data-role="open-clues" aria-label="Clues">🔍</button>
+        <button class="tray-btn" data-role="open-cast" aria-label="Cast">👥</button>
       </div>`;
 
     this.querySelector('[data-role=reached]').addEventListener('click', () => {
@@ -50,6 +51,9 @@ export class DirectorRail extends HTMLElement {
     });
     this.querySelector('[data-role=open-clues]').addEventListener('click', () => {
       this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'clues' }, bubbles: true }));
+    });
+    this.querySelector('[data-role=open-cast]').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'cast' }, bubbles: true }));
     });
   }
 }

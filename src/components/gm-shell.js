@@ -7,6 +7,7 @@ import './npc-tray.js';
 import './art-tray.js';
 import './prop-viewer.js';
 import './clue-net.js';
+import './cast-tray.js';
 import './con-hub.js';
 import { getScenario } from '../scenarios/index.js';
 
@@ -33,6 +34,7 @@ export class GmShell extends HTMLElement {
         <npc-tray hidden></npc-tray>
         <art-tray hidden></art-tray>
         <clue-net hidden></clue-net>
+        <cast-tray hidden></cast-tray>
       </main>
       <prop-viewer></prop-viewer>`;
     this.addEventListener('reached', () => this.onReached());
@@ -82,6 +84,7 @@ export class GmShell extends HTMLElement {
     const net = this.querySelector('clue-net');
     net.clues = this.scenario.clues || [];
     net.revealed = this.revealedClues;
+    this.querySelector('cast-tray').cast = this.scenario.cast || [];
     this.refresh();
   }
 
@@ -104,7 +107,7 @@ export class GmShell extends HTMLElement {
 
   onOpenTool(e) {
     const tool = e.detail?.tool;
-    const trays = { dice: 'dice-tray', npc: 'npc-tray', art: 'art-tray', clues: 'clue-net' };
+    const trays = { dice: 'dice-tray', npc: 'npc-tray', art: 'art-tray', clues: 'clue-net', cast: 'cast-tray' };
     if (!(tool in trays)) return;
     const target = this.querySelector(trays[tool]);
     const willShow = target.hidden;

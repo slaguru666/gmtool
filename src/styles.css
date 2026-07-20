@@ -107,3 +107,16 @@ director-rail[hidden] { display: none; }
 .hub-open { border: none; padding: 10px 20px; border-radius: 9px; background: #1c8a5a; color: #eafff4;
   font-weight: 700; font-size: 14px; flex: 0 0 auto; }
 .hub-soon { font-size: 11px; color: #6b7a8d; flex: 0 0 auto; }
+
+/* Cast roster tray */
+.cast-tray { position: absolute; top: 0; left: 0; right: 0; background: #0f141b; border-bottom: 1px solid #2b3644; padding: 14px; display: flex; flex-direction: column; gap: 10px; max-height: 100%; overflow-y: auto; }
+cast-tray[hidden] { display: none; }
+.cast-list { display: flex; flex-direction: column; gap: 6px; }
+.cast-row { display: flex; gap: 10px; align-items: flex-start; padding: 9px 11px; border: 1px solid #263041; border-radius: 8px; }
+.cast-body { flex: 1; min-width: 0; }
+.cast-name { font-size: 13px; font-weight: 700; color: #e7eef6; }
+.cast-kind { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; color: #9fb0c2; border: 1px solid #2a3542; border-radius: 10px; padding: 1px 6px; }
+.cast-note { font-size: 12px; color: #9fb0c2; margin-top: 3px; }
+.cast-secret { font-size: 12px; color: #ffd479; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #2b3644; }
+.cast-reveal { flex: 0 0 auto; border: 1px solid #2a3542; background: #161d27; color: #cfe0f0; font-size: 11px; font-weight: 700; border-radius: 8px; padding: 6px 12px; }
+.cast-empty { color: #6b7a8d; font-size: 12px; }

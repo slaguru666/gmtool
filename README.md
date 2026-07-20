@@ -63,7 +63,7 @@ Components are dumb renderers that emit events; the shell wires them together.
 | `src/con/` | Convention data (`continuum-2026.js`; `example-con.js` is a fully-timed template) |
 | `src/components/director-rail.js` | `<director-rail>` — the always-on pacing bar (🎲 👤 ✏️ 🔍 chips) |
 | `src/components/dice-tray.js` | `<dice-tray>` — pack selector + die picker + roll + verdict |
-| `src/components/npc-tray.js` · `art-tray.js` · `prop-viewer.js` · `clue-net.js` | The tray tools |
+| `src/components/npc-tray.js` · `art-tray.js` · `prop-viewer.js` · `clue-net.js` · `cast-tray.js` | The tray tools (`cast-tray` renders `scenario.cast` with tap-to-reveal secrets) |
 | `src/components/gm-shell.js` | `<gm-shell>` — root wiring + persistence |
 | `src/scenarios/` | Scenario data files (six Continuum slots: `afterimage`, `day-one`, `vain-crown`, `silvery-moon`, `chopper`, `princes-bride`; `example-with-clues.js` is a template); `index.js` is the registry |
 | `public/` | `manifest.webmanifest`, `sw.js` (offline service worker) |
@@ -97,7 +97,7 @@ compress if you reach a beat behind schedule.
 3. **Slice 3** — dice rule-packs (CoC d100, VANITY d6-pool, Panic & Glory, Dee Sanction) + tray pack selector. ✅
 4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks). ✅
 5. **Slice 5** — the convention **hub** (all slots, live "live now / up next / done", deep-links into each scenario). ✅ All **six** Continuum 2026 slots ported and scheduled with real times.
-6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; a cast-dashboard UI to surface the ported `scenario.cast` rosters; a dedicated BRP dice pack (Day One currently borrows the d100 pack); markdown → scenario-data generator; native iPad wrapper.
+6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; a dedicated BRP dice pack (Day One currently borrows the d100 pack); markdown → scenario-data generator; native iPad wrapper.
 
 ## Docs
 

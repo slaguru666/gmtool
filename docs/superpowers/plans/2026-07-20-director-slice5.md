@@ -65,7 +65,12 @@ jsdom. No new dependencies. Fully offline.
   Note: the `cast` field has no UI consumer yet (the design reserves it for a future cast dashboard) —
   this is a data-model port. Pregens/PCs are intentionally excluded (separate character-sheet/handout system).
 
+- **Cast tray built.** `<cast-tray>` (`src/components/cast-tray.js`) renders `scenario.cast` — name +
+  one-line note, each secret behind a tap-to-reveal — wired into the shell (`cast` tool key) with a
+  👥 rail chip. Reveal state is ephemeral component state. `tests/components/cast-tray.test.js` +
+  `gm-shell-cast.test.js` cover it.
+
 ## Still deferred (backlog)
 
-- A **cast dashboard** UI to surface `scenario.cast` (parallels `<clue-net>`).
 - A dedicated **BRP** dice pack — Day One currently borrows `coc-d100` (d100 roll-under).
+- Break-timer / parking-lot / wake-lock tray tools; online art "Generate".
