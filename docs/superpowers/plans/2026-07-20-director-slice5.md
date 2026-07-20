@@ -52,7 +52,14 @@ jsdom. No new dependencies. Fully offline.
   - Correction found while porting: the real slate is **six** slots (Slot 5 *Silvery Moon* was
     missing from the first hub draft), and "Another Fine Mess" is *Get to the Chopper — Another Fine Mess*.
 
+- **All six scenarios' clue trails ported** into the data model (transcribed from the console
+  `CLUES`/`gbclue`/module sources via `extract-clues.mjs`), so the Slice 4 safety-net now works
+  against real content. `tests/scenarios/clues.test.js` guards shape + solvability. The four
+  GM-brief-sourced trails (afterimage, vain-crown, silvery-moon, chopper) mark every tracked
+  clue `essential: true` (their source is a single curated spine); day-one and princes-bride carry
+  the source's own essential/optional split.
+
 ## Still deferred (backlog)
 
-- Porting each scenario's **clue trails / cast** into the data model (shipped `clues: []` like AFTERIMAGE).
+- Porting each scenario's **cast** into the data model (still `cast: []`).
 - A dedicated **BRP** dice pack — Day One currently borrows `coc-d100` (d100 roll-under).

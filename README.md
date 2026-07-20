@@ -97,7 +97,7 @@ compress if you reach a beat behind schedule.
 3. **Slice 3** — dice rule-packs (CoC d100, VANITY d6-pool, Panic & Glory, Dee Sanction) + tray pack selector. ✅
 4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks). ✅
 5. **Slice 5** — the convention **hub** (all slots, live "live now / up next / done", deep-links into each scenario). ✅ All **six** Continuum 2026 slots ported and scheduled with real times.
-6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; porting the scenarios' clue trails / cast into the data model; a dedicated BRP dice pack (Day One currently borrows the d100 pack); markdown → scenario-data generator; native iPad wrapper.
+6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; porting the scenarios' cast into the data model (clue trails done); a dedicated BRP dice pack (Day One currently borrows the d100 pack); markdown → scenario-data generator; native iPad wrapper.
 
 ## Docs
 

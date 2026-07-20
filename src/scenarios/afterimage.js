@@ -8,7 +8,14 @@ export default {
     { id: 'a3-pier',    act: 3, label: 'Pier confrontation',        targetMin: 175, hardTrigger: true },
     { id: 'epilogue',   act: 4, label: 'Baseline / ambiguous end',  targetMin: 200 },
   ],
-  clues: [],
+  clues: [
+    { id: 'c1', label: 'The door-cam face that cannot exist (hand the still around as an object)', essential: true },
+    { id: 'c2', label: 'The ledger: A-1 · A-2 · A-3 — and A-3’s file just reads “retired”', essential: true },
+    { id: 'c3', label: 'The identical childhood, recited twice across the split', essential: true, fallback: 'the monologue cards ×2' },
+    { id: 'c4', label: 'The spike was intimate — face to face, not an execution (Avis)', essential: true },
+    { id: 'c5', label: 'Pier + dawn deadline known before 2:45', essential: true, fallback: 'both Act Two tracks carry it' },
+    { id: 'c6', label: 'Whisper-9 is stolen Wallace property — why Corvin has legal cover', essential: true },
+  ],
   cast: [],
   props: [],
 };

@@ -13,7 +13,15 @@ export default {
     { id: 'esc',   label: 'ESCAPE SEQUENCE — four phases, everyone rolls, blades', targetMin: 160, hardTrigger: true },
     { id: 'epi',   label: 'Epilogue — beers, the satellite photo, "finish your beers"', targetMin: 170 },
   ],
-  clues: [],
+  clues: [
+    { id: 'c1', label: 'The tannoy countdown — “test at thirteen hundred”', essential: true, fallback: 'the patrol radio, Act One' },
+    { id: 'c2', label: 'The shrines face INLAND — apologising to the sea', essential: true },
+    { id: 'c3', label: 'Concha’s warning: they are fishing, with a very big hook', essential: true, fallback: 'Willis’s cell wall: “they keep singing about a wedding”' },
+    { id: 'c4', label: 'The empty plans tube — AL VOLCÁN, this morning', essential: true, fallback: 'Volkova’s office if Beat 3 is cut' },
+    { id: 'c5', label: 'Segal’s mandala = the array layout (the reward for fixing him properly)', essential: true },
+    { id: 'c6', label: 'THE BIRDS STOP — the gear change, marked plainly (SAN 0/1D2)', essential: true },
+    { id: 'c7', label: 'While 3+ singers hold the note, the console alone cannot stop it', essential: true },
+  ],
   cast: [],
   props: [],
 };
