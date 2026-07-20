@@ -1,14 +1,6 @@
 import { generateNpc } from '../npc/generator.js';
 import { getGenrePack, listGenrePacks } from '../npc/packs/index.js';
-
-function escapeHtml(s) {
-  return String(s ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
+import { escapeHtml } from '../core/escape-html.js';
 
 export class NpcTray extends HTMLElement {
   constructor() {

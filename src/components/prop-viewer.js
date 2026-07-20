@@ -1,3 +1,5 @@
+import { escapeHtml } from '../core/escape-html.js';
+
 export class PropViewer extends HTMLElement {
   constructor() { super(); this._src = ''; this._label = ''; }
   connectedCallback() { if (!this.hasAttribute('hidden')) this.setAttribute('hidden', ''); this.render(); }
@@ -14,7 +16,7 @@ export class PropViewer extends HTMLElement {
   render() {
     this.innerHTML = `
       <div class="prop-overlay" data-role="overlay">
-        <img class="prop-img" data-role="prop-img" src="${this._src}" alt="${this._label}" />
+        <img class="prop-img" data-role="prop-img" src="${escapeHtml(this._src)}" alt="${escapeHtml(this._label)}" />
       </div>`;
     this.querySelector('[data-role=overlay]').addEventListener('click', () => this.dismiss());
   }

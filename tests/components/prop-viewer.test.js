@@ -26,4 +26,11 @@ describe('<prop-viewer>', () => {
     el.querySelector('[data-role=overlay]').click();
     expect(el.isOpen()).toBe(false);
   });
+
+  it('escapes a label containing a quote (no attribute break)', () => {
+    el.show('/art/x.png', 'x" onerror="boom');
+    const img = el.querySelector('[data-role=prop-img]');
+    expect(img.getAttribute('alt')).toBe('x" onerror="boom');
+    expect(img.hasAttribute('onerror')).toBe(false);
+  });
 });
