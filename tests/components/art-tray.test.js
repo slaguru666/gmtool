@@ -34,10 +34,14 @@ describe('<art-tray>', () => {
     expect(detail).toEqual({ src: '/art/b.png', label: 'Neon street' });
   });
 
-  it('escapes a query containing a quote (input does not break)', () => {
-    const input = el.querySelector('[data-role=art-query]');
-    input.value = 'rain " <x>';
-    input.dispatchEvent(new Event('input'));
-    expect(el.querySelector('[data-role=art-query]').value).toBe('rain " <x>');
+  it('escapes malicious manifest label/src in rendered thumbnails', () => {
+    document.body.innerHTML = '';
+    const bad = document.createElement('art-tray');
+    bad.manifest = [{ id: 'x', src: '/art/x.png', label: 'evil" onerror="boom', tags: ['x'] }];
+    document.body.appendChild(bad);
+    const img = bad.querySelector('[data-art-id="x"] img');
+    expect(img).not.toBe(null);
+    expect(img.hasAttribute('onerror')).toBe(false);       // attribute not injected
+    expect(img.getAttribute('alt')).toBe('evil" onerror="boom'); // literal value, escaped then parsed back
   });
 });

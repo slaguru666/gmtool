@@ -10,13 +10,17 @@ export class ArtTray extends HTMLElement {
   }
   connectedCallback() { this.render(); }
 
-  render() {
-    const results = searchArt(this.manifest, this._query);
-    const grid = results.map((a) => `
+  renderThumb(a) {
+    return `
       <button class="thumb" data-art-id="${escapeHtml(a.id)}" title="${escapeHtml(a.label)}">
         <img src="${escapeHtml(a.src)}" alt="${escapeHtml(a.label)}" loading="lazy" />
         <span class="thumb-cap">${escapeHtml(a.label)}</span>
-      </button>`).join('');
+      </button>`;
+  }
+
+  render() {
+    const results = searchArt(this.manifest, this._query);
+    const grid = results.map((a) => this.renderThumb(a)).join('');
 
     this.innerHTML = `
       <div class="art-tray">
@@ -33,11 +37,7 @@ export class ArtTray extends HTMLElement {
   renderResults() {
     const results = searchArt(this.manifest, this._query);
     const container = this.querySelector('[data-role=art-results]');
-    container.innerHTML = results.map((a) => `
-      <button class="thumb" data-art-id="${escapeHtml(a.id)}" title="${escapeHtml(a.label)}">
-        <img src="${escapeHtml(a.src)}" alt="${escapeHtml(a.label)}" loading="lazy" />
-        <span class="thumb-cap">${escapeHtml(a.label)}</span>
-      </button>`).join('') || '<div class="art-empty">No matches</div>';
+    container.innerHTML = results.map((a) => this.renderThumb(a)).join('') || '<div class="art-empty">No matches</div>';
     this.bindThumbs();
   }
 
