@@ -7,12 +7,15 @@ import './npc-tray.js';
 import './art-tray.js';
 import './prop-viewer.js';
 import './clue-net.js';
+import './con-hub.js';
+import { getScenario } from '../scenarios/index.js';
 
 export class GmShell extends HTMLElement {
   constructor() {
     super();
     this.now = () => Date.now();
     this.scenario = null;
+    this.con = null;
     this.store = null;
     this.clockState = initialClock();
     this.stamps = {};
@@ -23,6 +26,7 @@ export class GmShell extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
+      <con-hub hidden></con-hub>
       <director-rail></director-rail>
       <main class="stage">
         <dice-tray hidden></dice-tray>
@@ -36,6 +40,35 @@ export class GmShell extends HTMLElement {
     this.addEventListener('keep-npc', (e) => this.onKeepNpc(e));
     this.addEventListener('show-prop', (e) => this.onShowProp(e));
     this.addEventListener('toggle-clue', (e) => this.onToggleClue(e));
+    this.addEventListener('open-scenario', (e) => this.onOpenScenario(e));
+    this.addEventListener('open-hub', () => this.showHub());
+  }
+
+  loadCon(con) {
+    this.con = con;
+    const hub = this.querySelector('con-hub');
+    hub.now = this.now;
+    hub.con = con;
+    this.showHub();
+  }
+
+  showHub() {
+    this.querySelector('con-hub').hidden = false;
+    this.querySelector('director-rail').hidden = true;
+    this.querySelector('.stage').hidden = true;
+  }
+
+  showSession() {
+    this.querySelector('con-hub').hidden = true;
+    this.querySelector('director-rail').hidden = false;
+    this.querySelector('.stage').hidden = false;
+  }
+
+  onOpenScenario(e) {
+    const scenario = getScenario(e.detail?.scenarioId);
+    if (!scenario) return;
+    this.loadScenario(scenario);
+    this.showSession();
   }
 
   loadScenario(scenario) {

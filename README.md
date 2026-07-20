@@ -57,6 +57,10 @@ Components are dumb renderers that emit events; the shell wires them together.
 | `src/npc/` | NPC generator (`generator.js`) + genre table packs (`packs/noir.js`) |
 | `src/art/` | Pencil-art library search (`search.js`) + tagged manifest |
 | `src/clues/safety-net.js` | Clue safety-net engine (essential-gap + solvability) |
+| `src/con/schedule.js` | Pure convention-schedule analysis (live / up-next / done / upcoming) |
+| `src/components/con-hub.js` | `<con-hub>` — the convention landing screen; deep-links into a scenario |
+| `src/scenarios/index.js` | Scenario registry (`getScenario(id)`) the hub deep-links through |
+| `src/con/` | Convention data (`continuum-2026.js`; `example-con.js` is a fully-timed template) |
 | `src/components/director-rail.js` | `<director-rail>` — the always-on pacing bar (🎲 👤 ✏️ 🔍 chips) |
 | `src/components/dice-tray.js` | `<dice-tray>` — pack selector + die picker + roll + verdict |
 | `src/components/npc-tray.js` · `art-tray.js` · `prop-viewer.js` · `clue-net.js` | The tray tools |
@@ -92,8 +96,8 @@ compress if you reach a beat behind schedule.
 2. **Slice 2** — NPC generator (offline genre tables) + art generator (offline pencil-art library). ✅
 3. **Slice 3** — dice rule-packs (CoC d100, VANITY d6-pool, Panic & Glory, Dee Sanction) + tray pack selector. ✅
 4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks). ✅
-5. **Slice 5** — the convention **hub** (all slots, live "up next / live now").
-6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; scenario porting from the Continuum docs; markdown → scenario-data generator; native iPad wrapper.
+5. **Slice 5** — the convention **hub** (all slots, live "live now / up next / done", deep-links into each scenario). ✅
+6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; scenario porting from the Continuum docs; real slot start-times for the hub; markdown → scenario-data generator; native iPad wrapper.
 
 ## Docs
 

@@ -26,6 +26,7 @@ export class DirectorRail extends HTMLElement {
           <span class="v"><span data-role="here">${here}</span>${drift ? ` <span class="drift ${driftClass}">${drift}</span>` : ''}</span></div>
         <div class="cell trig"><span class="k">Next hard trigger</span><span class="v" data-role="next">${nhText}</span></div>
         <button class="reached" data-role="reached">✓ Reached it</button>
+        <button class="tray-btn" data-role="open-hub" aria-label="Hub">🏠</button>
         <button class="tray-btn" data-role="open-dice" aria-label="Dice">🎲</button>
         <button class="tray-btn" data-role="open-npc" aria-label="NPC">👤</button>
         <button class="tray-btn" data-role="open-art" aria-label="Art">✏️</button>
@@ -34,6 +35,9 @@ export class DirectorRail extends HTMLElement {
 
     this.querySelector('[data-role=reached]').addEventListener('click', () => {
       this.dispatchEvent(new CustomEvent('reached', { bubbles: true }));
+    });
+    this.querySelector('[data-role=open-hub]').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('open-hub', { bubbles: true }));
     });
     this.querySelector('[data-role=open-dice]').addEventListener('click', () => {
       this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'dice' }, bubbles: true }));

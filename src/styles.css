@@ -78,3 +78,32 @@ clue-net[hidden] { display: none; }
 .clue-act { font-size: 10px; color: #7f8ea0; }
 .clue-fallback { margin-top: 4px; font-size: 12px; color: #ff9c9c; }
 .clue-empty { color: #6b7a8d; font-size: 12px; }
+
+/* Slice 5 — convention hub */
+con-hub[hidden] { display: none; }
+director-rail[hidden] { display: none; }
+.stage[hidden] { display: none; }
+.hub { padding: 20px 16px 32px; max-width: 720px; margin: 0 auto; }
+.hub--empty { color: #6b7a8d; font-size: 13px; padding: 24px 16px; }
+.hub-head { margin-bottom: 16px; }
+.hub-title { font-size: 22px; font-weight: 800; margin: 0 0 6px; letter-spacing: .01em; }
+.hub-summary { font-size: 13px; font-weight: 700; }
+.hub-summary .hub-live { color: #8ff0b6; }
+.hub-summary .hub-next { color: #ffd479; }
+.hub-summary .hub-idle { color: #7f8ea0; }
+.hub-list { display: flex; flex-direction: column; gap: 10px; }
+.hub-card { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #263041;
+  border-radius: 12px; background: #12171f; }
+.hub-card.status-live { border-color: #2f7d54; background: #12211a; }
+.hub-card.status-next { border-color: #4a3a1f; }
+.hub-card.status-done { opacity: .55; }
+.hub-card-main { flex: 1; min-width: 0; }
+.hub-card-title { font-size: 16px; font-weight: 700; color: #e7eef6; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hub-card-meta { font-size: 12px; color: #8fa1b4; margin-top: 3px; }
+.hub-badge { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; border-radius: 12px; padding: 2px 8px;
+  background: #1b2431; color: #9fb0c2; border: 1px solid #2a3542; }
+.hub-badge.badge-live { background: #17251c; color: #8ff0b6; border-color: #2f7d54; }
+.hub-badge.badge-next { background: #2a2013; color: #ffd479; border-color: #4a3a1f; }
+.hub-open { border: none; padding: 10px 20px; border-radius: 9px; background: #1c8a5a; color: #eafff4;
+  font-weight: 700; font-size: 14px; flex: 0 0 auto; }
+.hub-soon { font-size: 11px; color: #6b7a8d; flex: 0 0 auto; }
