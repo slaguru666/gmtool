@@ -16,6 +16,16 @@ export default {
     { id: 'c5', label: 'Pier + dawn deadline known before 2:45', essential: true, fallback: 'both Act Two tracks carry it' },
     { id: 'c6', label: 'Whisper-9 is stolen Wallace property — why Corvin has legal cover', essential: true },
   ],
-  cast: [],
+  cast: [
+    { id: 'cmdr-bryant', name: 'Cmdr. Bryant', kind: 'npc', note: 'RDU commander — ally, guarded', secret: 'If asked to expedite the IDENT CONFLICT desk review: “Can’t. Wallace liaison put a hold on all RDU record reviews tonight. Funny, that.”' },
+    { id: 'dr-avis', name: 'Dr. Avis', kind: 'npc', note: 'Coroner — friendly' },
+    { id: 'wren-unit-a-1', name: 'Wren (unit A-1)', kind: 'npc', note: 'The runner — flight, then fragile trust', secret: 'If she escapes: origami sparrow under the wiper — YOU WANT THE TRUTH. THE PIER. DAWN.' },
+    { id: 'lark-unit-a-2', name: 'Lark (unit A-2)', kind: 'npc', note: 'The still one — cooperative, composed', secret: 'Under the grief: relief at being found out, without knowing for what.' },
+    { id: 'aris-kade', name: 'Aris Kade', kind: 'npc', note: 'The original — 38, exhausted beyond fear', secret: 'Truth-ending lever: “Say something. One of you. They’re your witnesses too.”' },
+    { id: 'corvin', name: 'Corvin', kind: 'npc', note: 'Wallace Asset Protection — a deadline in a good coat', secret: 'His warrant covers units and media ONLY — no paper on a human. A human homicide collapses his pretext. He will trade. Even his defeats are tidy.' },
+    { id: 'ap-officers-2', name: 'AP Officers ×2', kind: 'npc', note: 'Follow the warrant, not the man' },
+    { id: 'street-extras-improv', name: 'Street extras (improv)', kind: 'npc', note: 'Off-script encounters', secret: 'Fortune-teller line, aimed at a replicant PC: “Two birds with one song. The cage is open, officer. Whose hand closed it?”' },
+    { id: 'auntie-bo', name: 'Auntie Bo', kind: 'npc', note: 'Night-market broth queen — stall 44', secret: 'Will never sell Wren out — a phone call ahead only means Wren is already spooked.' },
+  ],
   props: [],
 };

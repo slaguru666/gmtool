@@ -28,6 +28,14 @@ export default {
     { id: 'c11', label: 'Pete’s radio confirms the north-bank cordon — closes the loop.', essential: false, act: 'Act Three' },
     { id: 'c12', label: 'The RIB’s fuel gauge — check it before trusting the escape route.', essential: false, act: 'Act Three' },
   ],
-  cast: [],
+  cast: [
+    { id: 'fatima', name: 'FATIMA BALOGUN', kind: 'npc', note: 'Market stall owner — first competent adult voice' },
+    { id: 'callum', name: 'PC CALLUM FRASER', kind: 'npc', note: 'Met constable, 28 — institution failing around him', secret: 'Heard "first reports… Elephant… 07:14" before comms went patchy. Hasn’t told anyone. When the cordon fragment lands, play his face first.' },
+    { id: 'sharif', name: 'DR YASMIN SHARIF', kind: 'npc', note: 'Off-duty A&E consultant — will name what this is', secret: 'She wants to reach St Thomas’ — 2.5 km west. She is wrong. The state of Guy’s (visible from the car park) is the counter-argument. Losing her costs the group its best medic.' },
+    { id: 'marcus', name: 'MARCUS', kind: 'npc', note: '19, livestreaming to 41,000 — walking liability', secret: 'Phone at 31%. When it dies, he’s just a scared 19-year-old — that’s a beat, not a punishment. Chat reports military massing at London Bridge north approach.' },
+    { id: 'helen', name: 'HELEN', kind: 'npc', note: '"I’m sure it’s a gas leak." The bravest person here', secret: 'Thirty years Cabinet Office. "There’s a protocol for this. If they haven’t activated it, something went wrong before the alert." Names Meridian if trusted. THE MOMENT: once, she steps into danger for someone else. Play it straight. Recommended reanimation victim.' },
+    { id: 'pete', name: 'PETE', kind: 'npc', note: 'Bridge Group foreman — triage with no good options', secret: 'Knows the cordon is real (someone in his group has a radio). Hasn’t told his people. Has already turned away two infected and dealt with the consequences — he is broken, not cruel.' },
+    { id: 'minors', name: 'MINORS — Gordon · Danny · Declan & Ryan · Bridge Group', kind: 'npc', note: 'Stat as minors', secret: 'DANNY: bitten 40 min before the pub; jacket over the arm; turns if the group stays ~30 min — Sharif spots him in 5. RYAN is also bitten (blood on sleeve) — post-alert bites already symptomatic.' },
+  ],
   props: [],
 };

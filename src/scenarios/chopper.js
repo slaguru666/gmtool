@@ -22,6 +22,15 @@ export default {
     { id: 'c6', label: 'THE BIRDS STOP — the gear change, marked plainly (SAN 0/1D2)', essential: true },
     { id: 'c7', label: 'While 3+ singers hold the note, the console alone cannot stop it', essential: true },
   ],
-  cast: [],
+  cast: [
+    { id: 'esc', name: 'COMANDANTE ESCORPIÓN', kind: 'npc', note: 'Strongman, half-transformed; mirror shades over nictitating membranes' },
+    { id: 'volkova', name: 'COL. KATYA VOLKOVA', kind: 'npc', note: 'Soviet handler — the hinge, not the villain. Carries the launch keys', secret: 'From the turn she counts as a pulp ally and shoots like one. Superb chopper-door face for the final frame.' },
+    { id: 'padre', name: 'PADRE MARISCO', kind: 'npc', note: 'Salt-cured priest of the Trench; conducts rather than fights' },
+    { id: 'singers', name: 'STONE-SINGERS', kind: 'npc', note: 'The note does not stop for breath — or bullets, entirely' },
+    { id: 'willis', name: 'AGENT B. WILLIS', kind: 'npc', note: 'Ally from the cells — barefoot, vest, mouth running' },
+    { id: 'segal', name: 'AGENT S. SEGAL', kind: 'npc', note: 'Silk robe, herbal tea, whale-song — hypno-conditioned, not a traitor', secret: 'Never fixed? He wanders toward the volcano "for the ceremony" at the worst moment. Comedy becomes stakes.' },
+    { id: 'mooks', name: 'RED TIDE MOOKS', kind: 'npc', note: 'They miss, gloriously. They drop from one hit. That is their whole job' },
+    { id: 'novia', name: 'LA NOVIA — THE BRIDE', kind: 'npc', note: 'Never statted. Some things are endings, not encounters' },
+  ],
   props: [],
 };

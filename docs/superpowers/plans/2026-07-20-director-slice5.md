@@ -59,7 +59,13 @@ jsdom. No new dependencies. Fully offline.
   clue `essential: true` (their source is a single curated spine); day-one and princes-bride carry
   the source's own essential/optional split.
 
+- **All six scenarios' cast rosters ported** (NPCs, `kind: 'npc'`) via `extract-cast.mjs`, normalising
+  the two source schemas (`{id,name,ess,sec}` consoles and `{name,tag,secret}` modules) to
+  `{ id, name, kind, note, secret? }`. `tests/scenarios/cast.test.js` guards shape + unique ids.
+  Note: the `cast` field has no UI consumer yet (the design reserves it for a future cast dashboard) —
+  this is a data-model port. Pregens/PCs are intentionally excluded (separate character-sheet/handout system).
+
 ## Still deferred (backlog)
 
-- Porting each scenario's **cast** into the data model (still `cast: []`).
+- A **cast dashboard** UI to surface `scenario.cast` (parallels `<clue-net>`).
 - A dedicated **BRP** dice pack — Day One currently borrows `coc-d100` (d100 roll-under).
