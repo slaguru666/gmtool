@@ -24,3 +24,15 @@ describe('year-zero rule-pack', () => {
     expect(getRulePack('x')).toBe(custom);
   });
 });
+
+describe('year-zero contract v2', () => {
+  it('exposes an empty params list and a summary string', () => {
+    expect(yearZero.params).toEqual([]);
+    expect(yearZero.summary({ successes: 2, ones: 1 })).toBe('2 successes · 1 stress');
+    expect(yearZero.summary({ successes: 1, ones: 0 })).toBe('1 success');
+  });
+  it('interpret ignores a params argument', () => {
+    const v = yearZero.interpret([{ sides: 8, value: 8 }], { anything: true });
+    expect(v.successes).toBe(1);
+  });
+});

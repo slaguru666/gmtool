@@ -11,6 +11,7 @@ export class DiceTray extends HTMLElement {
     this._systemId = 'year-zero';
     this.rng = Math.random;
     this.last = null;
+    this.params = {};
   }
   get sides() { return this._sides; }
   set sides(v) { this._sides = Number(v); this.render(); }
@@ -24,7 +25,7 @@ export class DiceTray extends HTMLElement {
   roll() {
     const { results, total } = rollPool([{ sides: this._sides, count: this._count }], this.rng);
     const pack = getRulePack(this._systemId);
-    const verdict = pack ? pack.interpret(results) : null;
+    const verdict = pack ? pack.interpret(results, this.params) : null;
     this.last = { results, total, verdict };
     this.render();
     this.dispatchEvent(new CustomEvent('rolled', { detail: this.last, bubbles: true }));
@@ -36,9 +37,9 @@ export class DiceTray extends HTMLElement {
     const felt = this.last
       ? this.last.results.map((r) => `<span class="rolled" data-value="${r.value}">${r.value}</span>`).join('')
       : '<span class="hint">Tap Roll</span>';
+    const pack = getRulePack(this._systemId);
     const verdict = this.last?.verdict
-      ? `${this.last.verdict.successes} success${this.last.verdict.successes === 1 ? '' : 'es'}` +
-        (this.last.verdict.ones ? ` · ${this.last.verdict.ones} stress` : '')
+      ? (pack && pack.summary ? pack.summary(this.last.verdict) : '')
       : '';
 
     this.innerHTML = `
