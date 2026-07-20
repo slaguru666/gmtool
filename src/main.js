@@ -10,3 +10,9 @@ if (typeof document !== 'undefined' && document.querySelector('gm-shell')) {
     shell.loadScenario(afterimage);
   });
 }
+
+if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
