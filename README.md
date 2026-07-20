@@ -53,7 +53,7 @@ Components are dumb renderers that emit events; the shell wires them together.
 | `src/core/scenario.js` | Scenario validator |
 | `src/core/format.js` | Elapsed + drift display formatting |
 | `src/dice/roller.js` | Seedable dice core (pools, modifiers) |
-| `src/dice/rulepacks/` | System interpreters (Year-Zero, CoC d100, VANITY d6, Panic & Glory, Dee Sanction) + registry |
+| `src/dice/rulepacks/` | System interpreters (Year-Zero, CoC d100, BRP d100, VANITY d6, Panic & Glory, Dee Sanction) + registry |
 | `src/npc/` | NPC generator (`generator.js`) + genre table packs (`packs/noir.js`) |
 | `src/art/` | Pencil-art library search (`search.js`) + tagged manifest |
 | `src/clues/safety-net.js` | Clue safety-net engine (essential-gap + solvability) |
@@ -97,7 +97,7 @@ compress if you reach a beat behind schedule.
 3. **Slice 3** — dice rule-packs (CoC d100, VANITY d6-pool, Panic & Glory, Dee Sanction) + tray pack selector. ✅
 4. **Slice 4** — the clue **safety-net** (essential-clue gap tracker + fallbacks). ✅
 5. **Slice 5** — the convention **hub** (all slots, live "live now / up next / done", deep-links into each scenario). ✅ All **six** Continuum 2026 slots ported and scheduled with real times.
-6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; a dedicated BRP dice pack (Day One currently borrows the d100 pack); markdown → scenario-data generator; native iPad wrapper.
+6. **Later** — remaining tray tools (break timer, parking-lot note, wake-lock); online art "Generate"; markdown → scenario-data generator; native iPad wrapper.
 
 ## Docs
 

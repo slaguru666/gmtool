@@ -70,7 +70,10 @@ jsdom. No new dependencies. Fully offline.
   👥 rail chip. Reveal state is ephemeral component state. `tests/components/cast-tray.test.js` +
   `gm-shell-cast.test.js` cover it.
 
+- **BRP dice pack built.** `brp-d100` (`src/dice/rulepacks/brp-d100.js`) — fumble on 100, critical
+  ≤ skill/20, special ≤ skill/5, success ≤ skill (bands transcribed from the Day One console). Day
+  One's `meta.system` switched from `coc-d100` to `brp-d100`. `tests/dice/brp-d100.test.js` covers it.
+
 ## Still deferred (backlog)
 
-- A dedicated **BRP** dice pack — Day One currently borrows `coc-d100` (d100 roll-under).
 - Break-timer / parking-lot / wake-lock tray tools; online art "Generate".

@@ -1,8 +1,8 @@
 // DAY ONE — "London Falls" · Continuum 2026 · Fri Slot 1.
 // Timeline transcribed from gm-utility/day-one-console.html (SCHED array).
-// System is BRP; mapped to the d100 roller pack (no dedicated BRP pack yet).
+// System is BRP (Basic Roleplaying) — uses the dedicated brp-d100 rule-pack.
 export default {
-  meta: { id: 'day-one', title: 'DAY ONE — London Falls', system: 'coc-d100', players: 6, playMinutes: 210, slot: 'Fri · Slot 1' },
+  meta: { id: 'day-one', title: 'DAY ONE — London Falls', system: 'brp-d100', players: 6, playMinutes: 210, slot: 'Fri · Slot 1' },
   timeline: [
     { id: 'intro',  label: 'Intro done — six placed, alert fired, players converging', targetMin: 15 },
     { id: 'market', label: 'MARKET BREAKS — vendor bitten in full view, stampede (force it now if not yet)', targetMin: 60, hardTrigger: true },
