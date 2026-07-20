@@ -17,7 +17,7 @@ export class DiceTray extends HTMLElement {
   set sides(v) { this._sides = Number(v); this.render(); }
   get count() { return this._count; }
   set count(v) { this._count = Number(v); }
-  set systemId(v) { this._systemId = v; this.render(); }
+  set systemId(v) { this._systemId = v; this.render(); this.syncParams(); }
   get systemId() { return this._systemId; }
 
   connectedCallback() { this.render(); this.syncParams(); }
@@ -75,7 +75,7 @@ export class DiceTray extends HTMLElement {
     this.querySelectorAll('[data-sides]').forEach((b) =>
       b.addEventListener('click', () => { this.sides = Number(b.dataset.sides); }));
     this.querySelectorAll('[data-pack-id]').forEach((b) =>
-      b.addEventListener('click', () => { this._systemId = b.dataset.packId; this.syncParams(); this.render(); }));
+      b.addEventListener('click', () => { this._systemId = b.dataset.packId; this.render(); this.syncParams(); }));
     this.querySelectorAll('[data-param]').forEach((inp) =>
       inp.addEventListener('input', () => this.syncParams()));
     this.querySelector('[data-role=roll]').addEventListener('click', () => this.roll());
