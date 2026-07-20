@@ -120,3 +120,16 @@ cast-tray[hidden] { display: none; }
 .cast-secret { font-size: 12px; color: #ffd479; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #2b3644; }
 .cast-reveal { flex: 0 0 auto; border: 1px solid #2a3542; background: #161d27; color: #cfe0f0; font-size: 11px; font-weight: 700; border-radius: 8px; padding: 6px 12px; }
 .cast-empty { color: #6b7a8d; font-size: 12px; }
+
+/* Break timer tray + rail break badge */
+.break-timer { position: absolute; top: 0; left: 0; right: 0; background: #0f141b; border-bottom: 1px solid #2b3644; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+break-timer[hidden] { display: none; }
+.break-durs { display: flex; gap: 8px; flex-wrap: wrap; }
+.break-dur { min-width: 54px; padding: 9px 14px; border-radius: 9px; background: #161d27; border: 1px solid #2a3542; color: #c6d5e6; font-weight: 600; font-size: 14px; }
+.break-dur.on { background: #2a2013; border-color: #7a651f; color: #ffd479; }
+.break-start { border: none; padding: 12px; border-radius: 9px; background: #2a2013; color: #ffd479; font-weight: 700; font-size: 14px; border: 1px solid #7a651f; }
+.break-status { font-size: 20px; font-weight: 800; color: #ffd479; padding: 6px 2px; }
+.break-status.over { color: #ff9c9c; }
+.break-end { border: none; padding: 12px; border-radius: 9px; background: #1c8a5a; color: #eafff4; font-weight: 700; font-size: 14px; }
+.break-badge { margin-left: 8px; font-size: 10px; font-weight: 800; letter-spacing: .1em; color: #ffd479; border: 1px solid #7a651f; border-radius: 12px; padding: 1px 7px; vertical-align: middle; }
+.rail .cell.on-break .v { color: #ffd479; }

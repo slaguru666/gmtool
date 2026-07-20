@@ -10,7 +10,7 @@ export class DirectorRail extends HTMLElement {
   update(patch) { Object.assign(this._state, patch); this.render(); }
 
   render() {
-    const { scenario, elapsedMs, stamps } = this._state;
+    const { scenario, elapsedMs, stamps, paused } = this._state;
     if (!scenario) { this.innerHTML = `<div class="rail rail--empty">No scenario loaded</div>`; return; }
     const m = analyze(scenario.timeline, elapsedMs / 60000, stamps);
     const here = m.currentBeat ? m.currentBeat.label : (scenario.timeline[0]?.label ?? '—');
@@ -21,7 +21,7 @@ export class DirectorRail extends HTMLElement {
 
     this.innerHTML = `
       <div class="rail">
-        <div class="cell"><span class="k">Session</span><span class="v" data-role="clock">${fmtElapsed(elapsedMs)}</span></div>
+        <div class="cell${paused ? ' on-break' : ''}"><span class="k">Session</span><span class="v" data-role="clock">${fmtElapsed(elapsedMs)}${paused ? ' <span class="break-badge" data-role="break-badge">☕ BREAK</span>' : ''}</span></div>
         <div class="cell here"><span class="k">You are here</span>
           <span class="v"><span data-role="here">${here}</span>${drift ? ` <span class="drift ${driftClass}">${drift}</span>` : ''}</span></div>
         <div class="cell trig"><span class="k">Next hard trigger</span><span class="v" data-role="next">${nhText}</span></div>
@@ -32,6 +32,7 @@ export class DirectorRail extends HTMLElement {
         <button class="tray-btn" data-role="open-art" aria-label="Art">✏️</button>
         <button class="tray-btn" data-role="open-clues" aria-label="Clues">🔍</button>
         <button class="tray-btn" data-role="open-cast" aria-label="Cast">👥</button>
+        <button class="tray-btn" data-role="open-break" aria-label="Break timer">☕</button>
       </div>`;
 
     this.querySelector('[data-role=reached]').addEventListener('click', () => {
@@ -54,6 +55,9 @@ export class DirectorRail extends HTMLElement {
     });
     this.querySelector('[data-role=open-cast]').addEventListener('click', () => {
       this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'cast' }, bubbles: true }));
+    });
+    this.querySelector('[data-role=open-break]').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('open-tool', { detail: { tool: 'break' }, bubbles: true }));
     });
   }
 }

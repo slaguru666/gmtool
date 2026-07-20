@@ -1,5 +1,5 @@
 import { createStore } from '../core/store.js';
-import { initialClock, start, elapsedMs } from '../core/clock.js';
+import { initialClock, start, pause, resume, elapsedMs, isRunning, isPaused } from '../core/clock.js';
 import { nextUnreachedBeat } from '../core/timeline.js';
 import './director-rail.js';
 import './dice-tray.js';
@@ -8,6 +8,7 @@ import './art-tray.js';
 import './prop-viewer.js';
 import './clue-net.js';
 import './cast-tray.js';
+import './break-timer.js';
 import './con-hub.js';
 import { getScenario } from '../scenarios/index.js';
 
@@ -22,6 +23,7 @@ export class GmShell extends HTMLElement {
     this.stamps = {};
     this.cast = [];
     this.revealedClues = [];
+    this.breakEndsAt = null;
     this._tick = null;
   }
 
@@ -35,6 +37,7 @@ export class GmShell extends HTMLElement {
         <art-tray hidden></art-tray>
         <clue-net hidden></clue-net>
         <cast-tray hidden></cast-tray>
+        <break-timer hidden></break-timer>
       </main>
       <prop-viewer></prop-viewer>`;
     this.addEventListener('reached', () => this.onReached());
@@ -42,6 +45,8 @@ export class GmShell extends HTMLElement {
     this.addEventListener('keep-npc', (e) => this.onKeepNpc(e));
     this.addEventListener('show-prop', (e) => this.onShowProp(e));
     this.addEventListener('toggle-clue', (e) => this.onToggleClue(e));
+    this.addEventListener('start-break', (e) => this.onStartBreak(e));
+    this.addEventListener('end-break', () => this.onEndBreak());
     this.addEventListener('open-scenario', (e) => this.onOpenScenario(e));
     this.addEventListener('open-hub', () => this.showHub());
   }
@@ -85,6 +90,7 @@ export class GmShell extends HTMLElement {
     net.clues = this.scenario.clues || [];
     net.revealed = this.revealedClues;
     this.querySelector('cast-tray').cast = this.scenario.cast || [];
+    this.breakEndsAt = this.store.get('break', null);
     this.refresh();
   }
 
@@ -107,7 +113,7 @@ export class GmShell extends HTMLElement {
 
   onOpenTool(e) {
     const tool = e.detail?.tool;
-    const trays = { dice: 'dice-tray', npc: 'npc-tray', art: 'art-tray', clues: 'clue-net', cast: 'cast-tray' };
+    const trays = { dice: 'dice-tray', npc: 'npc-tray', art: 'art-tray', clues: 'clue-net', cast: 'cast-tray', break: 'break-timer' };
     if (!(tool in trays)) return;
     const target = this.querySelector(trays[tool]);
     const willShow = target.hidden;
@@ -133,12 +139,38 @@ export class GmShell extends HTMLElement {
     this.querySelector('prop-viewer').show(e.detail.src, e.detail.label);
   }
 
+  onStartBreak(e) {
+    if (!isRunning(this.clockState)) return;   // a break only makes sense mid-session
+    const now = this.now();
+    this.clockState = pause(this.clockState, now);
+    this.breakEndsAt = now + (e.detail?.minutes ?? 10) * 60000;
+    this.store.set('clock', this.clockState);
+    this.store.set('break', this.breakEndsAt);
+    if (!this._tick) this._tick = setInterval(() => this.refresh(), 1000);
+    this.refresh();
+  }
+
+  onEndBreak() {
+    if (!isPaused(this.clockState)) return;
+    this.clockState = resume(this.clockState, this.now());
+    this.breakEndsAt = null;
+    this.store.set('clock', this.clockState);
+    this.store.set('break', null);
+    this.refresh();
+  }
+
   refresh() {
+    const paused = isPaused(this.clockState);
     this.querySelector('director-rail').update({
       scenario: this.scenario,
       elapsedMs: this.elapsedMs(),
       stamps: this.stamps,
+      paused,
     });
+    this.querySelector('break-timer').state = {
+      onBreak: paused,
+      remainingMs: paused && this.breakEndsAt != null ? this.breakEndsAt - this.now() : null,
+    };
   }
 }
 customElements.define('gm-shell', GmShell);

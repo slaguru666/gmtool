@@ -74,6 +74,11 @@ jsdom. No new dependencies. Fully offline.
   ≤ skill/20, special ≤ skill/5, success ≤ skill (bands transcribed from the Day One console). Day
   One's `meta.system` switched from `coc-d100` to `brp-d100`. `tests/dice/brp-d100.test.js` covers it.
 
+- **Break timer built.** `<break-timer>` pauses the session clock for a break (reusing the clock's
+  existing `pause`/`resume`), so break time never poisons drift. Shell owns the pause/resume +
+  persistence (`break` store key); the rail shows a ☕ on-break badge; `fmtCountdown` (M:SS) added to
+  `format.js`. Tests: `break-timer.test.js`, `gm-shell-break.test.js` (incl. the drift-honesty case).
+
 ## Still deferred (backlog)
 
-- Break-timer / parking-lot / wake-lock tray tools; online art "Generate".
+- Parking-lot note + wake-lock tray tools; online art "Generate".
