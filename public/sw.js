@@ -1,5 +1,9 @@
 const CACHE = 'director-v1';
-const SHELL = ['/', '/index.html', '/src/main.js', '/src/styles.css'];
+// Precache only stable, build-invariant navigation paths. Hashed asset
+// bundles (/assets/*) are cached at runtime on first online load by the
+// cache-first fetch handler below. (Follow-up: generate a full precache
+// list from the Vite build manifest for cold-offline-before-first-visit.)
+const SHELL = ['/', '/index.html'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));

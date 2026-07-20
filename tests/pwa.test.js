@@ -18,9 +18,15 @@ describe('PWA wiring', () => {
     expect(js).toContain('serviceWorker');
     expect(js).toContain("register('/sw.js')");
   });
-  it('service worker precaches the shell', () => {
+  it('service worker precaches only stable shell paths', () => {
     const sw = readFileSync('public/sw.js', 'utf8');
     expect(sw).toContain('addEventListener');
     expect(sw).toContain('caches');
+    const shellMatch = sw.match(/SHELL\s*=\s*\[([^\]]*)\]/);
+    expect(shellMatch).not.toBe(null);
+    const shell = shellMatch[1];
+    expect(shell).toContain("'/'");
+    expect(shell).toContain("'/index.html'");
+    expect(shell).not.toContain('/src/');
   });
 });
