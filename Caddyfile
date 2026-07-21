@@ -1,0 +1,15 @@
+:80 {
+	root * /srv
+	encode gzip zstd
+
+	# The service worker and entry HTML must never be cached, so PWA updates land.
+	@nocache path /sw.js / /index.html /manifest.webmanifest
+	header @nocache Cache-Control "no-cache"
+
+	# Hashed build assets and icons are content-addressed → cache forever.
+	@immutable path /assets/* /icons/*
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
+
+	try_files {path} /index.html
+	file_server
+}

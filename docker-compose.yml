@@ -1,0 +1,9 @@
+services:
+  director:
+    build: .
+    image: the-director:latest
+    container_name: the-director
+    restart: unless-stopped
+    ports:
+      # host:container — point your director.timevans.uk route at host port 8087
+      - "8087:80"

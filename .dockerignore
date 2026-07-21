@@ -1,0 +1,8 @@
+node_modules
+dist
+.git
+.github
+ios
+resources
+.superpowers
+*.log
