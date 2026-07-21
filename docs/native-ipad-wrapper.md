@@ -29,8 +29,9 @@ npm run ios:add      # = vite build → npx cap add ios   (runs pod install)
 This creates `ios/` (an Xcode project under `ios/App`). Commit it — it is the native
 project source. Generated/derived paths inside it are git-ignored (see `.gitignore`).
 
-App icons + splash (once): drop a 1024×1024 source at `resources/icon.png` and a
-splash at `resources/splash.png`, then `npx @capacitor/assets generate --ios`.
+App icons + splash (once): placeholder sources are provided at `resources/icon.png`
+(1024²) and `resources/splash.png` (2732²) — regenerate with `npm run gen:icons`, or
+replace them with real art. Then `npx @capacitor/assets generate --ios`.
 
 ## Every build after a web change
 
