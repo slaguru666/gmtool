@@ -11,6 +11,7 @@ import './clue-net.js';
 import './cast-tray.js';
 import './break-timer.js';
 import './parking-lot.js';
+import './run-board.js';
 import './con-hub.js';
 import { getScenario } from '../scenarios/index.js';
 
@@ -36,6 +37,7 @@ export class GmShell extends HTMLElement {
       <con-hub hidden></con-hub>
       <director-rail></director-rail>
       <main class="stage">
+        <run-board></run-board>
         <dice-tray hidden></dice-tray>
         <npc-tray hidden></npc-tray>
         <art-tray hidden></art-tray>
@@ -203,6 +205,11 @@ export class GmShell extends HTMLElement {
       onBreak: paused,
       remainingMs: paused && this.breakEndsAt != null ? this.breakEndsAt - this.now() : null,
     };
+    this.querySelector('run-board').update({
+      scenario: this.scenario,
+      elapsedMs: this.elapsedMs(),
+      stamps: this.stamps,
+    });
   }
 }
 customElements.define('gm-shell', GmShell);

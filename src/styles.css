@@ -3,20 +3,24 @@
 body { margin: 0; font-family: ui-sans-serif, system-ui, sans-serif; background: #0b0e13; color: #e7eef6; }
 gm-shell { display: block; }
 
-.rail { display: flex; align-items: stretch; height: 64px; background: linear-gradient(180deg,#12171f,#0d1117);
+.rail { display: flex; align-items: stretch; min-height: 72px; background: linear-gradient(180deg,#12171f,#0d1117);
   border-bottom: 1px solid #263041; }
-.rail .cell { padding: 7px 14px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #1e2733; }
-.rail .here { flex: 1; }
-.rail .k { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #6b7a8d; }
-.rail .v { font-size: 15px; font-weight: 600; }
+.rail .cell { padding: 8px 16px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #1e2733; min-width: 0; }
+.rail .here { flex: 3 1 0; }
+.rail .trig { flex: 2 1 0; }
+.rail .k { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #6b7a8d; margin-bottom: 2px; }
+.rail .v { font-size: 15px; font-weight: 600; line-height: 1.25; }
+/* Clamp long beat / trigger labels to two lines — never let them bleed or clip the bar. */
+.rail .here .v, .rail .trig .v { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.rail [data-role=clock] { font-variant-numeric: tabular-nums; }
 .rail .trig .v { color: #ffd479; }
-.drift { margin-left: 6px; padding: 1px 7px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.drift { margin-left: 6px; padding: 1px 7px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
 .drift.behind { background: #4a1f1f; color: #ff9c9c; }
 .drift.ahead { background: #1f3a2a; color: #9cffc4; }
-.reached { border: none; padding: 0 18px; background: #1c8a5a; color: #eafff4; font-weight: 700; font-size: 14px; }
-.tray-btn { border: none; width: 60px; background: #182130; color: #cfe0f0; font-size: 20px; }
+.reached { border: none; padding: 0 20px; background: #1c8a5a; color: #eafff4; font-weight: 700; font-size: 14px; white-space: nowrap; flex: 0 0 auto; }
+.tray-btn { border: none; width: 52px; background: #182130; color: #cfe0f0; font-size: 20px; flex: 0 0 auto; }
 
-.stage { position: relative; min-height: calc(100vh - 64px); }
+.stage { position: relative; min-height: calc(100vh - 72px); }
 .dice-tray { position: absolute; top: 0; left: 0; right: 0; background: #0f141b; border-bottom: 1px solid #2b3644;
   padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .dice-tray[hidden] { display: none; }
@@ -158,3 +162,60 @@ parking-lot[hidden] { display: none; }
 .art-endpoint { flex: 1; background: #161d27; border: 1px solid #2a3542; border-radius: 8px; padding: 9px 11px; color: #e7eef6; font-size: 12px; }
 .art-endpoint-save { border: none; padding: 9px 16px; border-radius: 8px; background: #1e3a52; color: #dcefff; font-weight: 700; font-size: 12px; }
 .thumb--gen { outline: 1px solid #3f7fb0; }
+
+/* ===== iPad / large-screen layout pass ===== */
+
+/* Open trays fill the whole stage as solid panels (not a thin top strip). */
+.dice-tray, .npc-tray, .art-tray, .clue-net, .cast-tray, .break-timer, .parking-lot {
+  inset: 0; overflow-y: auto; padding: 18px 20px;
+}
+
+/* Run board — the always-there stage view behind the trays (the whole run at a glance). */
+.run-board { padding: 20px 22px 32px; max-width: 960px; margin: 0 auto; }
+.rb-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.rb-title { font-size: 21px; font-weight: 800; letter-spacing: .01em; }
+.rb-meta { font-size: 13px; color: #8fa1b4; }
+.rb-drift.behind { color: #ff9c9c; font-weight: 700; }
+.rb-drift.ahead { color: #9cffc4; font-weight: 700; }
+.rb-list { display: flex; flex-direction: column; gap: 7px; }
+.rb-beat { display: flex; gap: 14px; align-items: flex-start; padding: 11px 14px; border: 1px solid #1e2733; border-radius: 10px; }
+.rb-beat.done { opacity: .5; }
+.rb-beat.current { border-color: #2f7d54; background: #12211a; }
+.rb-time { font-variant-numeric: tabular-nums; font-weight: 700; color: #9fb0c2; min-width: 54px; flex: 0 0 auto; }
+.rb-beat.hard .rb-time { color: #ffd479; }
+.rb-body { flex: 1; min-width: 0; }
+.rb-label { font-size: 14px; color: #e7eef6; line-height: 1.35; }
+.rb-hard { font-size: 9px; text-transform: uppercase; letter-spacing: .08em; color: #ffd479; border: 1px solid #4a3a1f; border-radius: 10px; padding: 1px 6px; white-space: nowrap; }
+.rb-cut { font-size: 12px; color: #8fa1b4; margin-top: 4px; }
+.rb-mark { margin-left: auto; font-size: 12px; font-weight: 700; color: #8ff0b6; white-space: nowrap; flex: 0 0 auto; }
+.rb-beat.current .rb-mark { color: #9cffc4; }
+
+/* Roomier, more legible at tablet width; use the horizontal space. */
+@media (min-width: 1024px) {
+  .rail { min-height: 82px; }
+  .stage { min-height: calc(100vh - 82px); }
+  .rail .k { font-size: 11px; }
+  .rail .v { font-size: 17px; }
+  .rail [data-role=clock] { font-size: 20px; }
+  .tray-btn { width: 62px; font-size: 23px; }
+  .reached { font-size: 16px; padding: 0 26px; }
+
+  .run-board { padding: 28px 26px 40px; }
+  .rb-title { font-size: 24px; }
+  .rb-label { font-size: 16px; }
+  .rb-time, .rb-mark, .rb-meta, .rb-cut { font-size: 14px; }
+  .rb-beat { padding: 14px 16px; }
+
+  .clue-row, .cast-row, .pl-note { padding: 13px 15px; }
+  .clue-label, .cast-name, .pl-text { font-size: 15px; }
+  .clue-fallback, .cast-note, .pl-at, .cast-secret { font-size: 13px; }
+  .clue-banner { font-size: 15px; }
+  .art-results { grid-template-columns: repeat(5, 1fr); }
+  .break-status { font-size: 28px; }
+  .break-dur, .break-start, .break-end { font-size: 16px; padding: 14px 18px; }
+}
+
+@media (min-width: 1366px) {
+  .run-board { max-width: 1100px; }
+  .art-results { grid-template-columns: repeat(6, 1fr); }
+}
