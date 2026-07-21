@@ -1,8 +1,5 @@
-const CACHE = 'director-v1';
-// Precache only stable, build-invariant navigation paths. Hashed asset
-// bundles (/assets/*) are cached at runtime on first online load by the
-// cache-first fetch handler below. (Follow-up: generate a full precache
-// list from the Vite build manifest for cold-offline-before-first-visit.)
+const CACHE = 'director-v2';
+// Precache the navigation shell so a cold, offline launch works.
 const SHELL = ['/', '/index.html'];
 
 self.addEventListener('install', (e) => {
@@ -16,6 +13,22 @@ self.addEventListener('activate', (e) => {
 });
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
+  const url = new URL(e.request.url);
+  const isDoc = e.request.mode === 'navigate' || url.pathname === '/' || url.pathname.endsWith('.html');
+
+  if (isDoc) {
+    // Network-first for the page itself, so a new deploy lands immediately;
+    // fall back to the cached shell when offline.
+    e.respondWith(
+      fetch(e.request).then((res) => {
+        if (res.ok) { const copy = res.clone(); e.waitUntil(caches.open(CACHE).then((c) => c.put(e.request, copy))); }
+        return res;
+      }).catch(() => caches.match(e.request).then((hit) => hit || caches.match('/index.html')))
+    );
+    return;
+  }
+
+  // Cache-first for hashed, content-addressed assets (immutable), caching at runtime.
   e.respondWith(
     caches.match(e.request).then((hit) => hit || fetch(e.request).then((res) => {
       if (res.ok && res.type === 'basic') {
