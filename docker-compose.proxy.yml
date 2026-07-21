@@ -1,0 +1,14 @@
+# Deploy behind an existing reverse proxy (e.g. Caddy) that owns 80/443 on a
+# shared external docker network named "proxy". The container publishes no host
+# ports; the edge proxy routes to it by name: `reverse_proxy the-director:80`.
+#   docker compose -f docker-compose.proxy.yml up -d --build
+services:
+  director:
+    build: .
+    image: the-director:latest
+    container_name: the-director
+    restart: unless-stopped
+    networks: [proxy]
+networks:
+  proxy:
+    external: true
