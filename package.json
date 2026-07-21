@@ -11,6 +11,7 @@
     "test:watch": "vitest",
     "gen:scenario": "node tools/md-to-scenario.mjs",
     "gen:icons": "node tools/gen-icons.mjs",
+    "gen:art": "node tools/gen-art-placeholders.mjs",
     "ios:add": "npm run build && cap add ios",
     "ios:sync": "npm run build && cap sync ios",
     "ios:open": "cap open ios",
