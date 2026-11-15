@@ -1,0 +1,53 @@
+// VIVA VOCE · Contingency 2027 · Fri Slot 8 · Call of Cthulhu 7e (1920s).
+// Source: games/slot08-coc-viva-voce/scenarios/viva-voce.md (v1.1); PC names from characters/viva-voce-pregens.md.
+// Act Three’s 3:05 / 3:08 vote calls read as session clock (the viva starts at 2:45 = 3pm fiction).
+// The Countdown has Lyle collect everyone at 2:30; the Act Two Pacing Note says 2:45 — the hard beat keeps 2:45.
+export default {
+  meta: { id: 'viva-voce', title: 'VIVA VOCE', system: 'coc-d100', players: '4–6', playMinutes: 210, slot: 'Fri · Slot 8' },
+  timeline: [
+    { id: 'intro',     act: 0, label: 'Intro done — safety line, pregens, favour accepted, Extract One (H0-A) handed out and read', targetMin: 15 },
+    { id: 'a1',        act: 1, label: 'Act One done — chapter order disagrees, 1928 citation called impossible, Hark’s pages seen; BREAK on Hark’s handwriting', targetMin: 75, cutHint: 'Drop clues 3 and 7 — never cut Hark’s pages', notes: 'Found nothing by 1:05? Hark writes one new line: “Ask her what she cannot hear.”' },
+    { id: 'a2-slip',   act: 2, label: 'The Keeper notices the slip of the 6th (1:15pm) — or is made to', targetMin: 100 },
+    { id: 'a2-reader', act: 2, label: 'Agnes Thurlow in the reading room with the Restricted copy (2:00pm)', targetMin: 130 },
+    { id: 'a2',        act: 2, label: 'Act Two planned end — thesis known as a method, both slips known', targetMin: 150, cutHint: 'Drop clue 13 and Amory’s parish record; merge Tracks A and B at 2:20 — never cut Extract Three or Thurlow', notes: 'Nobody went to the reading room? Thurlow walks past the committee at 2:40 carrying the book' },
+    { id: 'a2-hard',   act: 2, label: 'HARD — three o’clock: Lyle collects everybody and the viva happens', targetMin: 165, hardTrigger: true },
+    { id: 'a3-vote',   act: 3, label: 'Lyle calls the vote — 3:05 if behind, whether questioning is finished or not', targetMin: 185, notes: 'At six players: two-sentence cap per speech, vote at 3:08. The vote cannot be shortened.' },
+    { id: 'a3',        act: 3, label: 'Act Three done — vote taken, every player said which way and why', targetMin: 195 },
+    { id: 'epi',       act: 4, label: 'Epilogue done — vignettes keyed to the vote; the third slip is the last line', targetMin: 210 },
+  ],
+  clues: [
+    { id: 'c1',  label: 'Bound copy’s chapter order is not the abstract’s — reordered after submission', essential: true, act: 'Act One — The Morning' },
+    { id: 'c2',  label: 'A bibliography entry dated 1928 (H1-A) — the Act One checkpoint', essential: true, act: 'Act One — The Morning', fallback: 'Pell volunteers it in the corridor, going pink.' },
+    { id: 'c3',  label: 'Pell, Completion — cited, exists nowhere', essential: false, act: 'Act One — The Morning', fallback: 'Pell volunteers it in the same breath as the 1928 entry.' },
+    { id: 'c4',  label: 'Amory’s notes are real, uncatalogued, in the stacks (Keeper automatic)', essential: true, act: 'Act One — The Morning' },
+    { id: 'c5',  label: 'Hark read it in two sittings on 1 March; committed on the 2nd', essential: true, act: 'Act One — The Morning' },
+    { id: 'c6',  label: 'Hark’s hundred and ten pages — the same four sentences (Sanity 1/1D3)', essential: true, act: 'Act One — The Morning', fallback: 'The medical officer PC is admitted automatically — no roll.' },
+    { id: 'c7',  label: 'The four sentences are from chapter twelve, and getting wronger', essential: false, act: 'Act One — The Morning', fallback: 'Dr Sze says so, flatly, in Act Two.' },
+    { id: 'c8',  label: 'Sze read it slowly and is at the department today', essential: true, act: 'Act One — The Morning' },
+    { id: 'c9',  label: 'Sze cannot hear running water', essential: true, act: 'Act Two — The Afternoon', fallback: 'Sze carries 9, 10, 14 and 15 in one speech.' },
+    { id: 'c10', label: 'She read slowly, with breaks, and is intact — the dose is the reading', essential: true, act: 'Act Two — The Afternoon', fallback: 'Sze carries 9, 10, 14 and 15 in one speech.' },
+    { id: 'c11', label: 'Amory’s notes are the same argument, unfinished', essential: true, act: 'Act Two — The Afternoon' },
+    { id: 'c12', label: 'Amory’s last entry: “It does not want describing” (Sanity 0/1)', essential: true, act: 'Act Two — The Afternoon' },
+    { id: 'c13', label: 'Amory drowned in nine inches at the ford below Garrison Brook — §12.5', essential: false, act: 'Act Two — The Afternoon' },
+    { id: 'c14', label: 'Extract Three (H2-A) — chapter twelve; Sanity 1/1D4 if read attentively', essential: true, act: 'Act Two — The Afternoon', fallback: 'Sze carries 9, 10, 14 and 15 in one speech.' },
+    { id: 'c15', label: 'A copy was catalogued to the Restricted Collection on the 4th', essential: true, act: 'Act Two — The Afternoon', fallback: 'Sze’s speech; or the Registrar’s clerk PC requisitions the catalogue record without entering the stacks.' },
+    { id: 'c16', label: 'Two slips: J. Hark (6th, Keeper’s hand) and A. Thurlow (9th, her own)', essential: true, act: 'Act Two — The Afternoon' },
+    { id: 'c17', label: 'Thurlow is in the reading room, four hundred pages in', essential: true, act: 'Act Two — The Afternoon', fallback: 'Thurlow walks past the committee at 2:40 carrying the book, and says good afternoon.' },
+  ],
+  cast: [
+    { id: 'ardwin-pell', name: 'Ardwin Pell', kind: 'npc', note: 'candidate, 24 — found something real and finished it properly; polite, nervous, correct about everything', secret: 'Not a villain: meet every sinister read with politeness and a reasonable answer. Extract Four (H3-A) only if asked to explain chapter twelve.' },
+    { id: 'josiah-hark', name: 'Prof. Josiah Hark', kind: 'npc', note: '58, Arkham Sanatorium — wants to finish the sentence, and cannot', secret: 'Pages, not dialogue. No cure, no lucid moment.' },
+    { id: 'eleanor-sze', name: 'Dr Eleanor Sze', kind: 'npc', note: 'NPC examiner, 41 — cannot hear running water; wants the committee to do what she could not do alone', secret: 'The pacing valve: states Revelations 6, 7, 8 and 11 plainly. At four players winning her is mandatory.' },
+    { id: 'bertram-lyle', name: 'Prof. Bertram Lyle', kind: 'npc', note: 'the Chair, 63 — skimmed it, as he skims everything; intends to pass', secret: 'His skimming is his protection. Breaks a tie to pass.' },
+    { id: 'merrick-trowbridge', name: 'Dean Merrick Trowbridge', kind: 'npc', note: '61 — has not read it and will not pretend otherwise; courteous, unhurried, immovable', secret: 'External examiner at five and four players only. Votes with the Chair, to pass.' },
+    { id: 'agnes-thurlow', name: 'Miss Agnes Thurlow', kind: 'npc', note: 'graduate student, 23 — four hundred pages in and enjoying it', secret: 'The Countdown with a face. Nothing the vote does reaches her unless somebody takes the book.' },
+    { id: 'corliss-amory', name: 'Corliss Amory (d. 1851)', kind: 'npc', note: 'surveyor — walked the valley, wrote it down, drowned in nine inches' },
+    { id: 'ambrose-keel', name: 'Dr Ambrose Keel', kind: 'pc', note: 'geologist & hydrographer, 44, internal examiner — knows this valley better than the candidate, and has known one wrong thing about it since 1921' },
+    { id: 'reuben-ott', name: 'Dr Reuben Ott', kind: 'pc', note: 'university medical officer, 52, the Dean’s nominee — signed the paper that put a colleague in the Sanatorium nine days ago, and has not slept properly since' },
+    { id: 'verity-hallowes', name: 'Miss Verity Hallowes', kind: 'pc', note: 'mathematics instructor, 29 — the only person in the room who can say what the thesis does, and the last the room will let finish a sentence' },
+    { id: 'elias-crowder', name: 'Mr Elias Crowder', kind: 'pc', note: 'Keeper of the Restricted Collection, 38, no vote — catalogued it on the fourth in nine minutes, and filled in the slip of the sixth himself', secret: 'He knows who asked on the 6th. His to say or not — do not resolve it for him.' },
+    { id: 'dorcas-veale', name: 'Miss Dorcas Veale', kind: 'pc', note: 'Faculty secretary, 34, no vote — typed the fair copy in January for eleven dollars; four hundred and six pages, in order', secret: 'Can no longer read her own shorthand back. Hand it to her player privately, early.' },
+    { id: 'hiram-calloway', name: 'Prof. Hiram Calloway', kind: 'pc', note: 'visiting hydraulic engineer, 58 — Hark asked him by name to come a day early; he came this morning' },
+  ],
+  props: [],
+};

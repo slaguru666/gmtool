@@ -1,0 +1,52 @@
+// CONTINUOUS SERVICE · Contingency 2027 · Thu Slot 5 · ALIEN RPG, Cinematic (Year Zero).
+// Source: games/slot05-alien-continuous-service/scenarios/continuous-service.md (v1.1);
+// PC names from characters/continuous-service-pregens.md. Agenda hand-outs (0:05, 1:15, ~2:00, 2:40) folded into beats.
+// Vos and Banks are NPCs that become playable on a PC death; kept as kind 'npc'.
+export default {
+  meta: { id: 'continuous-service', title: 'CONTINUOUS SERVICE', system: 'year-zero', players: '4–6', playMinutes: 210, slot: 'Thu · Slot 5' },
+  timeline: [
+    { id: 'intro',      act: 0, label: 'Intro done — safety + lethality line, pregens dealt, every public agenda half said aloud, contract briefing', targetMin: 15, notes: 'Act One agendas out face down at 0:05, during Slot Zero' },
+    { id: 'first-door', act: 1, label: 'First contact — a door cycles and locks, forward; no creature, nothing seen', targetMin: 50, notes: 'At about 0:50, not before' },
+    { id: 'a1',         act: 1, label: 'Act One done — roster and payroll read; someone has said a person must be filing these; BREAK', targetMin: 75, cutHint: 'Shorten the walk. Do not cut the terminal', notes: 'Evaluate Act One agendas privately; Story Points, say nothing. Act Two agendas out at 1:15' },
+    { id: 'collision',  act: 2, label: 'The collision — two incompatible Act Two agendas on the same side of a door', targetMin: 120, cutHint: 'Drop the cradle-manifest detail (clue 12) and let Banks say it' },
+    { id: 'a2',         act: 2, label: 'Act Two planned end — Vos met, Banks found or heard, containers located, why the payroll runs, the tow is the danger', targetMin: 150, cutHint: 'Merge Track A and B at 2:05 and run one scene. Do not cut Vos', notes: 'Evaluate Act Two agendas; Story Points, still say nothing' },
+    { id: 'agendas-3',  act: 2, label: 'Hand out Act Three agendas — before the act turns, either way', targetMin: 160 },
+    { id: 'a2-hard',    act: 3, label: 'HARD — go to Act Three regardless, whatever is unfinished', targetMin: 165, hardTrigger: true, notes: 'Vos states 10, 11 and 14 herself in under a minute if undelivered' },
+    { id: 'a3',         act: 3, label: 'Act Three done — decision said aloud by a named player; who was aboard when it was signed', targetMin: 195, cutHint: 'Put H3-A down and ask one question: “Who’s signing?”' },
+    { id: 'epi',        act: 4, label: 'Epilogue done — per-survivor vignettes; the Company document; agendas revealed', targetMin: 210 },
+  ],
+  clues: [
+    { id: 'c1',  label: 'Lights, air and gravity on a maintained standby — somebody keeps it', essential: true, act: 'Act One — The Walk' },
+    { id: 'c2',  label: 'The galley is tidy; the bunks are made — nobody fled', essential: true, act: 'Act One — The Walk' },
+    { id: 'c3',  label: 'Forty-one souls aboard, all ON SHIFT (H1-A)', essential: true, act: 'Act One — The Walk', fallback: 'The tug’s contract requires manifest verification before tow; the medic or pilot is obliged to say so.' },
+    { id: 'c4',  label: 'All forty-one paid on time since 2175 (H1-B)', essential: true, act: 'Act One — The Walk', fallback: 'The tug’s contract requires manifest verification before tow.' },
+    { id: 'c5',  label: 'Nobody has drawn any of it — not done for money', essential: true, act: 'Act One — The Walk' },
+    { id: 'c6',  label: 'Aft lock maintenance log, eleven weeks old — the ninety-day cycle', essential: true, act: 'Act One — The Walk' },
+    { id: 'c7',  label: 'Thirty-eight personal effects boxed and labelled in a store', essential: false, act: 'Act One — The Walk' },
+    { id: 'c8',  label: 'A door cycles and locks, forward (0:50)', essential: true, act: 'Act One — The Walk' },
+    { id: 'c9',  label: 'Eleven years of wake logs: the same forty minutes (H2-B)', essential: true, act: 'Act Two — The Ship' },
+    { id: 'c10', label: 'Thirty-eight died in nine days, April 2175', essential: true, act: 'Act Two — The Ship' },
+    { id: 'c11', label: 'Nine containers loaded uninspected; the clause struck out and initialled (H2-A)', essential: true, act: 'Act Two — The Ship', fallback: 'The tug’s contract software will not close the job without the manifest.' },
+    { id: 'c12', label: 'Containers 1 and 4 were opened aboard on the ninth day (cradle manifest)', essential: true, act: 'Act Two — The Ship', fallback: 'First cut: let Banks say it.' },
+    { id: 'c13', label: 'Vos keeps the ship crewed so it cannot be salvaged and towed', essential: true, act: 'Act Two — The Ship', fallback: 'Vos states it herself in under a minute if the clock has gone.' },
+    { id: 'c14', label: 'A tow ends at a dock with eleven thousand people on it', essential: true, act: 'Act Two — The Ship', fallback: 'Vos states it herself; it is in the tug’s own paperwork.' },
+    { id: 'c15', label: 'Banks is alive, in the crawls above the cargo spine', essential: true, act: 'Act Two — The Ship', fallback: 'He calls out rather than be missed.' },
+    { id: 'c16', label: 'Seven containers are still sealed', essential: true, act: 'Act Two — The Ship', fallback: 'The tug’s contract software will not close the job without the manifest.' },
+    { id: 'c17', label: 'Filing the deaths is what makes the tow legal — the climax as a procedure', essential: true, act: 'Act Two — The Ship', fallback: 'Vos states it herself in under a minute if the clock has gone.' },
+    { id: 'c18', label: 'The accrued payroll is a Company-scale loss if the ship burns', essential: false, act: 'Act Two — The Ship' },
+  ],
+  cast: [
+    { id: 'ileana-vos', name: 'Ileana Vos', kind: 'npc', note: 'purser, 61 — awake forty minutes every ninety days for eleven years; wants the ship to stay crewed, and is right', secret: 'Will not leave: her authority codes are what payroll recognises. Playable on a PC death.' },
+    { id: 'aurelio-banks', name: 'Aurelio Banks', kind: 'npc', note: 'deck chief, 44 — alive in a crawlspace for a year; wants off, and is not wrong about anything', secret: 'Knows where the containers went. Playable on a PC death.' },
+    { id: 'the-creature', name: 'The creature', kind: 'npc', note: 'resident, not hunting; it has had eleven years', secret: 'One adult. Never depicted — track it on the deck plan.' },
+    { id: 'the-consignment', name: 'The consignment', kind: 'npc', note: 'nine containers, seven still sealed', secret: 'A threat, not a spawn table. You do not open them.' },
+    { id: 'weyland-yutani-payroll', name: 'Weyland-Yutani payroll', kind: 'npc', note: 'has paid every shift without once asking — not a villain, worse (H1-B)' },
+    { id: 'dessa-oyelaran', name: 'Captain Dessa Oyelaran', kind: 'pc', note: 'Officer, master of the Hawser — holds the contract, the debt and the only authority on this tug anyone has ever obeyed' },
+    { id: 'ruben-agbaje', name: 'Ruben Agbaje', kind: 'pc', note: 'Roughneck, deck boss and rigger — thirty years of other people’s holds, and one rule he will not bend tonight' },
+    { id: 'noor-halabi', name: 'Noor Halabi', kind: 'pc', note: 'Pilot — has not been last out of anywhere since she was twenty-four; counts the minutes to the lock like a pulse' },
+    { id: 'wen-pruitt', name: 'Wen Pruitt', kind: 'pc', note: 'Medic — counts the bodies herself; signed a list that was wrong, once, and will not do it again' },
+    { id: 'celia-marchetti', name: 'Celia Marchetti', kind: 'pc', note: 'Company Agent, W-Y Liabilities — here because a ledger in Gateway has a line that does not add up' },
+    { id: 'harlan-cobb', name: 'Deputy Marshal Harlan Cobb', kind: 'pc', note: 'Colonial Marshal, ICC witness — a derelict with a living roster cannot be salvaged without his signature, and he has not given it' },
+  ],
+  props: [],
+};

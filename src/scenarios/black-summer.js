@@ -1,0 +1,51 @@
+// BLACK SUMMER: LAST FLIGHT OUT · Contingency 2027 · Thu Slot 4 · The Walking Dead Universe (Year Zero, modified).
+// Source: games/slot04-black-summer/scenarios/black-summer.md (v1.1); PC names from characters/black-summer-pregens.md.
+// Act One beats are the three Challenges at their stated ~15/~15/~20 minutes. THE LINE (1–5) and the Threat Level
+// are separate tracks and not timeline beats; the pending pass-2 re-clock of THE LINE is noted on the Act Three beat.
+export default {
+  meta: { id: 'black-summer', title: 'BLACK SUMMER: LAST FLIGHT OUT', system: 'year-zero', players: '4–6', playMinutes: 210, slot: 'Thu · Slot 4' },
+  timeline: [
+    { id: 'intro',    act: 0, label: 'Intro done — pregens dealt, chits handed out, safety line said, PvP question asked', targetMin: 15 },
+    { id: 'a1-c1',    act: 1, label: 'Challenge One — out of the building; at least one PC has lost something they came with', targetMin: 30, notes: 'If the dice do not take it, the corridor does' },
+    { id: 'a1-c2',    act: 1, label: 'Challenge Two — the water; noise is the Runner clock', targetMin: 45, cutHint: 'Drop Challenge Two to a single roll and a description' },
+    { id: 'a1-c3',    act: 1, label: 'Challenge Three — Flatbush; the family, the radio (clues 3 and 4)', targetMin: 65, notes: 'Flatbush is not cuttable — the only place clues 3 and 4 live' },
+    { id: 'a1',       act: 1, label: 'Act One done — out of Manhattan; BREAK on the field’s lights across the marsh', targetMin: 75 },
+    { id: 'a2',       act: 2, label: 'Act Two planned end — truth known by one PC, chit count no longer three, walk-north said aloud', targetMin: 150, cutHint: 'Collapse the market to a single trade; then drop clue 16; Okonjo’s scene only past 2:30', notes: '2:20 the birds go up off the marsh and do not settle. Walk north is cheap only before 2:45 — say so out of character' },
+    { id: 'fence',    act: 3, label: 'HARD — the northern fence goes, whatever the table is doing; Act Three', targetMin: 165, hardTrigger: true, notes: 'THE LINE starts at 2; engine on the apron +1. Undelivered 6–9: Vasquez, drunk and frightened, in ninety seconds' },
+    { id: 'a3',       act: 3, label: 'Act Three done — decision said aloud at the wire; aircraft resolved; THE LINE at 5 or the plane gone', targetMin: 195, cutHint: 'Skip THE LINE’s slow rungs: start at 3, move every ninety seconds', notes: 'pass-2 fix pending: THE LINE moves on events plus a five-minute floor, reaching 5 by ~3:05 at the latest (not every two minutes)' },
+    { id: 'epi',      act: 4, label: 'Epilogue done — per-PC vignettes; outcome named; who is still standing in the grass', targetMin: 210 },
+  ],
+  clues: [
+    { id: 'c1',  label: 'The airlift is real; the chits are genuine issue', essential: true, act: 'Act One — The Crossing' },
+    { id: 'c2',  label: 'A chit without a matching face is refused at the gate — sharing cannot solve the maths', essential: true, act: 'Act One — The Crossing' },
+    { id: 'c3',  label: 'The family’s radio has heard nothing from the field since midday', essential: true, act: 'Act One — The Crossing', fallback: 'The family’s child volunteers it through a window if the adults refuse.' },
+    { id: 'c4',  label: 'Chits are bought and sold outside the wire — maybe a fourth chit', essential: true, act: 'Act One — The Crossing', fallback: 'A roadside body with a chit-shaped hole cut out of its coat lining.' },
+    { id: 'c5',  label: 'The field’s northern side backs onto marsh; the fence there is old (H1-A)', essential: false, act: 'Act One — The Crossing' },
+    { id: 'c6',  label: 'Soldiers seen leaving the field, walking inland', essential: false, act: 'Act One — The Crossing' },
+    { id: 'c7',  label: 'The market is open and chits have a price (H2-A, the board)', essential: true, act: 'Act Two — The Line' },
+    { id: 'c8',  label: 'No aircraft has taken off since midday', essential: true, act: 'Act Two — The Line' },
+    { id: 'c9',  label: 'The line has not advanced in four hours but is still being processed', essential: true, act: 'Act Two — The Line' },
+    { id: 'c10', label: 'Soldiers’ families walked to the apron separately, after dark (eastern wire)', essential: true, act: 'Act Two — The Line' },
+    { id: 'c11', label: 'A forged or dead man’s chit passes a tired corporal and fails an officer', essential: true, act: 'Act Two — The Line' },
+    { id: 'c12', label: 'The airlift was cancelled eighteen hours ago (Vasquez / H3-A)', essential: true, act: 'Act Two — The Line', fallback: 'Vasquez cannot keep it in — if avoided, he finds them.' },
+    { id: 'c13', label: 'The queue is the containment (Okonjo, or deduced from 9 + 10)', essential: true, act: 'Act Two — The Line', fallback: 'Vasquez cannot keep it in — if avoided, he finds them.' },
+    { id: 'c14', label: 'Mrs Adeyemi’s two chits — her own and her dead husband’s', essential: false, act: 'Act Two — The Line', fallback: 'She is at the market board on arrival and asks the doctor directly for insulin.' },
+    { id: 'c15', label: 'The northern fence is unwatched and the marsh is moving', essential: true, act: 'Act Two — The Line', fallback: 'The birds go up off the marsh at 2:20 and do not settle.' },
+    { id: 'c16', label: 'Okonjo has thirty-one soldiers for four thousand people', essential: false, act: 'Act Two — The Line' },
+  ],
+  cast: [
+    { id: 'ruth-okonjo', name: 'Major Ruth Okonjo', kind: 'npc', note: 'counted it both ways and is holding four thousand people still with a lie; courteous, exhausted, will not perform guilt', secret: 'Not a villain. Agrees if told to her face; will not change course: “Because I counted. Go on — you count.”' },
+    { id: 'danny-vasquez', name: 'Sgt Danny Vasquez', kind: 'npc', note: '26 — a soldier guarding a lie, selling it for a seat', secret: 'Eastern wire, between rotations. Wants out, and to be told it is not his fault.' },
+    { id: 'mrs-adeyemi', name: 'Mrs Adeyemi', kind: 'npc', note: 'has two chits and a dead husband’s face on one of them; wants insulin for her sister', secret: 'The fourth chit — offer it, never steer to it.' },
+    { id: 'the-tatum-brothers', name: 'The Tatum brothers', kind: 'npc', note: 'deal properly, and collect properly', secret: 'They collect in Act Three.' },
+    { id: 'the-flatbush-family', name: 'The Flatbush family', kind: 'npc', note: 'have a radio and a reason to fear soldiers; want to be left alone' },
+    { id: 'the-crowd', name: 'The crowd', kind: 'npc', note: 'four thousand people behaving as though the line works', secret: 'Crowd cards — never cut the boy with a chit and no adult, or the two sisters with one chit.' },
+    { id: 'dana-rusk', name: 'Dana Rusk', kind: 'pc', note: 'the Homemaker, 34, holds Chit A (Mina’s) — has walked a seven-year-old out of Manhattan and already decided she is not getting on the plane' },
+    { id: 'silas-boone', name: 'Cpl. Silas Boone', kind: 'pc', note: 'the Soldier, 26, no chit — deserted the Floyd Bennett detachment two days ago; knows one reason the queue is wrong' },
+    { id: 'teddy-marcu', name: 'Teodor “Teddy” Marcu', kind: 'pc', note: 'the Criminal, 41, holds Chit B (clean) — arrived with three chits and sold two' },
+    { id: 'priya-raman', name: 'Dr. Priya Raman', kind: 'pc', note: 'the Doctor, 52, no chit — the one person everyone has a practical reason to keep alive, and she has decided to use it' },
+    { id: 'cal-mercer', name: 'Cal Mercer', kind: 'pc', note: 'the Outcast, 38, holds Chit C (not his) — the chit says Hollis Pruitt, and Pruitt’s wife is in that queue' },
+    { id: 'dez-halloran', name: 'Dez Halloran', kind: 'pc', note: 'the Law Enforcer, 45, no chit — Port Authority police, eleven days out of uniform, carrying the most valuable useless object in New York' },
+  ],
+  props: [],
+};

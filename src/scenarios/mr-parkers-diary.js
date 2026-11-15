@@ -1,0 +1,51 @@
+// THE CURIOUS CASE OF MR PARKER’S DIARY · Contingency 2027 · Fri Slot 9 · Vaesen.
+// Source: games/slot09-vaesen-mr-parkers-diary/scenarios/mr-parkers-diary.md (v1.1);
+// PC names from characters/mr-parkers-diary-pregens.md. Intro is 20 min here, so Act One ends 1:20.
+// Clues 17–18 are typed “Optional-but-wanted” in the source — transcribed as essential: false.
+export default {
+  meta: { id: 'mr-parkers-diary', title: 'THE CURIOUS CASE OF MR PARKER’S DIARY', system: 'year-zero', players: '4–6', playMinutes: 210, slot: 'Fri · Slot 9' },
+  timeline: [
+    { id: 'intro',     act: 0, label: 'Intro done — only sheets in play dealt, safety line, the diary read, H2-B blanks filled in ink; Fear 2', targetMin: 20 },
+    { id: 'a1',        act: 1, label: 'Act One done — parish reached, Lind met, 1894 works and lapsed rite known; BREAK on the glimpse (Fear 2)', targetMin: 80, cutHint: 'Drop clues 6 and 7 and let Ström say both' },
+    { id: 'a2',        act: 2, label: 'Act Two planned end — the burning known, the telegram sent, Parker spoken to', targetMin: 150, cutHint: 'Drop the legal file and have Lind confess; compress Kerstin to one scene — never cut Parker' },
+    { id: 'a2-hard',   act: 2, label: 'HARD — go to Act Three regardless; cushion spent', targetMin: 165, hardTrigger: true },
+    { id: 'a3-wire',   act: 3, label: 'The telegram boy runs onto the ice with the name (3:05) — if the wire roll failed, or if behind', targetMin: 185, notes: 'The question becomes only who says it' },
+    { id: 'a3',        act: 3, label: 'Act Three done — the name spoken or consciously not; who spoke it recorded', targetMin: 195 },
+    { id: 'epi',       act: 4, label: 'Epilogue done — per-PC vignettes; what happened to the diary', targetMin: 210 },
+  ],
+  clues: [
+    { id: 'c1',  label: 'Parker lodged at the mill guest house, Sep–Oct', essential: true, act: 'Act One — Hällvattnet' },
+    { id: 'c2',  label: 'His effects were sent on — nobody posted the parcel', essential: true, act: 'Act One — Hällvattnet' },
+    { id: 'c3',  label: 'The north inlet was dammed and rerouted in 1894', essential: true, act: 'Act One — Hällvattnet' },
+    { id: 'c4',  label: 'Something was done at the old inlet each Michaelmas until 1894', essential: true, act: 'Act One — Hällvattnet' },
+    { id: 'c5',  label: 'Four children drowned under the ice in 1897', essential: true, act: 'Act One — Hällvattnet' },
+    { id: 'c6',  label: 'The 1897 graves have dates but no names cut', essential: false, act: 'Act One — Hällvattnet', fallback: 'Ström says it.' },
+    { id: 'c7',  label: 'Lind is evasive about the parish registers', essential: true, act: 'Act One — Hällvattnet', fallback: 'Ström says it.' },
+    { id: 'c8',  label: 'The glimpse — something keeping pace under the ice (Fear 2)', essential: true, act: 'Act One — Hällvattnet' },
+    { id: 'c9',  label: 'The register shelf’s 1893 gap — and the gap has been dusted', essential: true, act: 'Act Two — The Register', fallback: 'Ström carries 9, 10 and 11 if the legal file is never opened.' },
+    { id: 'c10', label: 'Lind burned it in 1895', essential: true, act: 'Act Two — The Register', fallback: 'Ström carries 9, 10 and 11 if the legal file is never opened.' },
+    { id: 'c11', label: 'The 1895 legal opinion — the easement; not malice', essential: true, act: 'Act Two — The Register', fallback: 'Ström carries 9, 10 and 11 if the legal file is never opened.' },
+    { id: 'c12', label: 'The rite: a name, over open water, at the inlet, each Michaelmas', essential: true, act: 'Act Two — The Register', fallback: 'Parker carries 12 and 13 if Kerstin is never found.' },
+    { id: 'c13', label: 'The speaker had to be someone the water had noticed — only a diary reader', essential: true, act: 'Act Two — The Register', fallback: 'Parker carries 12 and 13 if Kerstin is never found.' },
+    { id: 'c14', label: 'Kerstin will not say the name', essential: true, act: 'Act Two — The Register' },
+    { id: 'c15', label: 'The Härnösand transcript exists and can be wired for', essential: true, act: 'Act Two — The Register', fallback: 'The telegram never fails — the roll sets when: success in Act Two, failure at 3:05 on the ice.' },
+    { id: 'c16', label: 'Parker answers written questions in the diary (Fear 2)', essential: true, act: 'Act Two — The Register' },
+    { id: 'c17', label: 'Parker was asked, not taken, and agreed', essential: false, act: 'Act Two — The Register', fallback: 'Carried entirely by Parker’s own written answers.' },
+    { id: 'c18', label: 'The four children are still in the water, uncarried', essential: false, act: 'Act Two — The Register', fallback: 'Re-delivered by the mylingar in Act Three and four sets of small prints in the Epilogue.' },
+  ],
+  cast: [
+    { id: 'edmund-parker', name: 'Edmund Parker (d. 1900)', kind: 'npc', note: 'naturalist, 41 — the kept man; courteous, articulate, apologetic, never threatens', secret: 'Wants to be relieved of the post and will not ask. If a PC offers: “No. Think for a minute about why I have been so careful not to ask.”' },
+    { id: 'gustaf-lind', name: 'Gustaf Lind', kind: 'npc', note: 'mill owner — burned a book for a reason he still thinks was sound; partly right', secret: 'Sends the telegram anyway. Will helpfully suggest handing the diary on.' },
+    { id: 'kerstin-aho', name: 'Kerstin Aho', kind: 'npc', note: '79 — wants not to be the one who says it; her refusal is the last correct instinct in the parish', secret: 'Refuses three times. Genuinely persuaded, she speaks it — and dies within the year, and knew.' },
+    { id: 'elias-strom', name: 'Pastor Elias Ström', kind: 'npc', note: 'keeps the presbytery — wants the four children to have been carried; easy to open, unkind to open', secret: 'Will suggest handing the diary on — he wants it out of his church.' },
+    { id: 'the-four-children', name: 'The four children', kind: 'npc', note: 'mylingar — still in the water, waiting to be carried', secret: 'Never a threat.' },
+    { id: 'the-ferryman', name: 'The Ferryman', kind: 'npc', note: 'not malicious and not free', secret: 'Seen twice, no more. Its name, over open water at the old inlet, spoken by a diary reader. No Fear test at sighting two.' },
+    { id: 'henrietta-lindqvist', name: 'Henrietta “Etta” Lindqvist', kind: 'pc', note: 'academic, 38, Librarian — has read the last twenty pages four times, and has not told anyone she also copied them out' },
+    { id: 'oskar-thulin', name: 'Oskar Thulin', kind: 'pc', note: 'private detective, 58, Shadowmaker — twenty-nine years of being paid to find out, and one job he found out and filed the other answer' },
+    { id: 'hjalmar-brandt', name: 'Pastor Hjalmar Brandt', kind: 'pc', note: 'priest, 44, Custodian — very good at telling frightened people the thing that helps; no longer trusts himself to know when it is also true' },
+    { id: 'mats-keskitalo', name: 'Mats Keskitalo', kind: 'pc', note: 'hunter, 47, Guardian — can hear ice that is about to stop holding, and learned it the expensive way' },
+    { id: 'vivian-sparre', name: 'Vivian Sparre', kind: 'pc', note: 'writer, 41, Treasurer — Parker wrote to her for nine months about birds; she already knows how the lake made its offer' },
+    { id: 'teodor-molin', name: 'Teodor “Teddy” Molin', kind: 'pc', note: 'servant, 23, Castle Master — signed for the parcel, read it alone for an hour, and has not mentioned that part' },
+  ],
+  props: [],
+};

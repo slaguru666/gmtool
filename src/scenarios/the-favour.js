@@ -1,0 +1,51 @@
+// 1587: THE FAVOUR · Contingency 2027 · Sun Slot 13 · The Dee Sanction.
+// Source: games/slot13-dee-sanction-the-favour/scenarios/the-favour.md v1.1 (pass-1 fixes, 2026-11-03);
+// PCs are the seven THE PRINCES BRIDE agents named in characters/the-favour-pregens.md (pointer file; taglines used as essence).
+// Hard cut is the house 2:45 (visitation begins). Agnes, cited as a route to clue 17, is the PC Agnes Fairweather, not an NPC.
+export default {
+  meta: { id: 'the-favour', title: 'THE FAVOUR', system: 'dee-sanction', players: '4–6', playMinutes: 210, slot: 'Sun · Slot 13' },
+  timeline: [
+    { id: 'intro',    act: 0, label: 'Intro done — agents dealt, Dee’s one-line instruction (H1-A) read aloud, Garratt on the road', targetMin: 15 },
+    { id: 'a1-end',   act: 1, label: 'Act One done — village cold, Anne’s grave found, ≥2 of the eleven households; BREAK on Winterbourne’s offer', targetMin: 75, cutHint: 'Drop the gibbet field and the workings approach. Never cut Judith.' },
+    { id: 'a2-end',   act: 2, label: 'Act Two done — 1581 evidence rebuilt, Quiet Rent understood, meadowsweet taught or refused, list substantially filled', targetMin: 150, cutHint: 'Scenes 4 and 5 first. Never cut scene 2 or scene 6.', notes: 'Six scenes of ~12 min around H2-D. 2:30–2:45 is the cushion, not spare act.' },
+    { id: 'a3-visit', act: 3, label: 'HARD 2:45 — the visitation begins, whatever the table is doing', targetMin: 165, hardTrigger: true, cutHint: 'If behind: go straight to opening 3 — Garratt stands up.' },
+    { id: 'a3-end',   act: 3, label: 'Act Three done — the choice made and paid for; name which Agent did what', targetMin: 195 },
+    { id: 'epi',      act: 4, label: 'Epilogue done — per-PC vignettes keyed to each Sanction rhyme', targetMin: 210 },
+  ],
+  clues: [
+    { id: 'c1',  label: 'Garratt is recognised within the hour — the dale closes.', essential: true,  act: 'Act One — Skelthwaite' },
+    { id: 'c2',  label: 'Anne’s grave: unmarked, outside the wall, north side — with fresh flowers.', essential: true,  act: 'Act One — Skelthwaite' },
+    { id: 'c3',  label: 'The gibbet field is empty and carefully maintained — kept ready.', essential: true,  act: 'Act One — Skelthwaite' },
+    { id: 'c4',  label: 'The village is frightened rather than hostile.', essential: true,  act: 'Act One — Skelthwaite' },
+    { id: 'c5',  label: 'Three lawful deaths: ~1520, ~1551, 1581 — the pattern (no roll for Graves).', essential: true,  act: 'Act One — Skelthwaite', fallback: 'Winterbourne says it in his offer speech.' },
+    { id: 'c6',  label: 'Judith Ollerenshaw was nine and was there.', essential: true,  act: 'Act One — Skelthwaite' },
+    { id: 'c7',  label: 'Anne NAMED households from the ladder; she did not curse — the hinge.', essential: true,  act: 'Act One — Skelthwaite', fallback: 'Without Meg: an Intellectuall roll, and a Falter still delivers it.' },
+    { id: 'c8',  label: 'Two of the eleven names can be had at once (Judith) — the list starts.', essential: true,  act: 'Act One — Skelthwaite' },
+    { id: 'c9',  label: 'Garratt’s ledger (H2-A): £4 6s, 1581, and who paid it.', essential: true,  act: 'Act Two — The Ledger and the Register' },
+    { id: 'c10', label: 'The verdict column is half filled in a shakier hand.', essential: true,  act: 'Act Two — The Ledger and the Register' },
+    { id: 'c11', label: 'The 1581 deposition (H2-B) is forged, and well (no roll for Graves).', essential: true,  act: 'Act Two — The Ledger and the Register' },
+    { id: 'c12', label: 'One lawful death per generation, 1520 / 1551 / 1581 (H2-C + register).', essential: true,  act: 'Act Two — The Ledger and the Register', fallback: 'Winterbourne says it in his offer speech.' },
+    { id: 'c13', label: 'The adit boards are new — somebody maintains it.', essential: true,  act: 'Act Two — The Ledger and the Register' },
+    { id: 'c14', label: 'The deaths are a payment — the Quiet Rent, named (Winterbourne or Rye breaks).', essential: true,  act: 'Act Two — The Ledger and the Register', fallback: 'Winterbourne says it in his offer speech.' },
+    { id: 'c15', label: 'The 1581 payment was spoiled by the naming — six years outstanding.', essential: true,  act: 'Act Two — The Ledger and the Register', fallback: 'Winterbourne says it in his offer speech.' },
+    { id: 'c16', label: 'Clearing Anne publicly calls the debt in full — the trap, from the man who set it.', essential: true,  act: 'Act Two — The Ledger and the Register' },
+    { id: 'c17', label: 'The old courtesies would let it be treated with — Ending 4 (optional but load-bearing).', essential: false, act: 'Act Two — The Ledger and the Register', fallback: 'Routes: Henry Poter’s insert; Agnes; the teaching (Garratt asks once — any agent may answer).' },
+  ],
+  cast: [
+    { id: 'witch-finder-garratt', name: 'Witch Finder Garratt', kind: 'npc', note: 'wants one name off his ledger, and will not accept a private absolution', secret: 'Never repentant in a warm way. Declines absolution, courteously. Speaks at opening 3 unless given a reason he respects.' },
+    { id: 'ezra-winterbourne', name: 'Ezra Winterbourne', kind: 'npc', note: 'wants the rent paid before he dies, so his son never has to know', secret: 'Makes the offer: hang Garratt. Not wicked — would be relieved to be thought so. Fallback for the Quiet Rent facts in one speech.' },
+    { id: 'rev-bartholomew-rye', name: 'Rev. Bartholomew Rye', kind: 'npc', note: 'wants to have been somewhere else in 1581' },
+    { id: 'judith-ollerenshaw', name: 'Judith Ollerenshaw', kind: 'npc', note: 'wants to say what she saw — nine years old at the hanging', secret: 'The best clue and the most fragile witness. Never cut her.' },
+    { id: 'sir-marmaduke-cave', name: 'Sir Marmaduke Cave', kind: 'npc', note: 'wants a short visitation and a good dinner — not corrupt, merely busy', secret: 'Wants to be away by nine. Has four men.' },
+    { id: 'anne-suddaby', name: 'Anne Suddaby', kind: 'npc', note: 'hanged 1581 — wanted to be counted', secret: 'Present only as paper, a grave and eleven names in order. No apparition, no voice.' },
+    { id: 'the-thing-in-the-workings', name: 'The thing in the workings', kind: 'npc', note: 'owed, and patient', secret: 'Never named, never seen, never depicted. Nobody comes out of the workings.' },
+    { id: 'robert-graves', name: 'Robert Graves', kind: 'pc', note: 'scribe — the forger who knows exactly how evidence is made' },
+    { id: 'meg-alder', name: 'Margaret “Meg” Alder', kind: 'pc', note: 'miller’s widow — knows what grief makes people do' },
+    { id: 'agnes-fairweather', name: 'Agnes Fairweather', kind: 'pc', note: 'herbalist — the one they almost hanged, sent to save another' },
+    { id: 'nell-hawthorn', name: 'Eleanor “Nell” Hawthorn', kind: 'pc', note: 'unperson — can get into anywhere, including a church cell' },
+    { id: 'father-ambrose-whitlock', name: 'Father Ambrose Whitlock', kind: 'pc', note: 'parish priest — knows how faith curdles' },
+    { id: 'thomas-lynton', name: 'Thomas Lynton', kind: 'pc', note: 'barber-surgeon — can tell despair from devilry (first dropped at four)' },
+    { id: 'henry-poter', name: 'Henry Poter', kind: 'pc', note: 'harbour porter — stole the wrong book and learned the old rules (seventh sheet, held for a walk-up)' },
+  ],
+  props: [],
+};

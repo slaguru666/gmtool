@@ -1,0 +1,52 @@
+// PROVENANCE · Contingency 2027 · Sun Slot 14 · Outgunned Adventure 1.1 (system id 'outgunned'; no dice pack yet).
+// Source: games/slot14-outgunned-provenance/scenarios/provenance.md v1.1 (pass-1 fixes, 2026-11-03); PCs from characters/provenance-pregens.md.
+// Runtime: v1.1 Overview and timing table both now say 3:30 (the 3:35 survives only as a history note); timing table used.
+// Live contradiction: GM Essentials says hard rule 2:45, timing table says 2:40 — 2:40 used. Nuria is a PC (listed once).
+export default {
+  meta: { id: 'provenance', title: 'PROVENANCE', system: 'outgunned', players: '4–6', playMinutes: 210, slot: 'Sun · Slot 14' },
+  timeline: [
+    { id: 'intro',     act: 0, label: 'Intro done — Death Roulette script read; everyone said why they are in Aragón; Nogués and the photograph', targetMin: 15 },
+    { id: 'a1-end',    act: 1, label: 'Act One done — the Germans are legal and the crate seen; BREAK on the export licence (H1)', targetMin: 75, cutHint: 'Narrate the rim overlook in two sentences. Never cut first contact or the refugee scene.' },
+    { id: 'a2-run',    act: 2, label: '1:50 — run the Run in full only if ahead and the table visibly wants a set-piece', targetMin: 110, notes: 'Default: narrate it in four sentences. pass-2 fix pending: running it spends the ten-minute cushion and takes five minutes off Act Three.' },
+    { id: 'a2-count',  act: 2, label: 'Countdown — if Fournel’s reverse hasn’t landed, Rosalía delivers it', targetMin: 145 },
+    { id: 'a2-end',    act: 2, label: 'Act Two done — Fournel’s reverse read (or Rosalía said it); Thursday known', targetMin: 150, cutHint: 'The Run is the default cut — narrate it. Never cut Rosalía.' },
+    { id: 'a3-hard',   act: 3, label: 'HARD 2:40 — go to Act Three: the niche, first light', targetMin: 160, hardTrigger: true, cutHint: 'If behind: skip the lorries’ approach — open on the niche, Rosalía already there, engines audible.', notes: 'Earlier than the house 2:45 by design. pass-2 fix pending: GM Essentials still says 2:45.' },
+    { id: 'a3-end',    act: 3, label: 'Act Three done — the decision made out loud by a named player, the others’ positions stated', targetMin: 195 },
+    { id: 'epi',       act: 4, label: 'Epilogue done — per-PC vignettes, second refugee scene, Sant Grau’s list (H4) read in full as the last line', targetMin: 210 },
+  ],
+  clues: [
+    { id: 'c1',  label: 'Nine days, nothing taken out of the ground — they brought something.', essential: true, act: 'Act One — The Column' },
+    { id: 'c2',  label: 'The scaffold is against a rock face, not a dig.', essential: true, act: 'Act One — The Column' },
+    { id: 'c3',  label: 'The crate — Ritter will show them.', essential: true, act: 'Act One — The Column' },
+    { id: 'c4',  label: 'Condor Legion papers, in order — no authority here will help.', essential: true, act: 'Act One — The Column' },
+    { id: 'c5',  label: 'The 1932 Austrian export licence (H1) — they are legal.', essential: true, act: 'Act One — The Column' },
+    { id: 'c6',  label: 'Ritter’s facts are all correct — there is no forgery to find.', essential: true, act: 'Act One — The Column', fallback: 'Baltasar’s ESTIMATE makes it free; without him, Ritter says it: “You are looking for the join. There isn’t one.”' },
+    { id: 'c7',  label: 'Order of march and the Thursday schedule (H5) — the deadline.', essential: true, act: 'Act One — The Column', fallback: 'Degen will complain about the schedule to anyone who asks.' },
+    { id: 'c8',  label: 'A niche, already cut, already empty — the thing goes IN, not out.', essential: true, act: 'Act One — The Column', fallback: 'Automatic from the scaffold.' },
+    { id: 'c9',  label: 'The file is three centimetres thick and genuine.', essential: true, act: 'Act Two — The File' },
+    { id: 'c10', label: 'The 1874 auction entry and the 1932 sale — chain of title holds.', essential: true, act: 'Act Two — The File' },
+    { id: 'c11', label: 'The 1811 requisition, front (H2) — a quartermaster’s inventory line.', essential: true, act: 'Act Two — The File' },
+    { id: 'c12', label: 'Fournel’s reverse (H3): “removed for safety, by order, and not to be returned”.', essential: true, act: 'Act Two — The File', fallback: 'Turn it over; Focus+Know or Ritter translates; Countdown at 2:25 via Rosalía. Reach 2:45 without it: run Act Three anyway — Rosalía says it over the crate.' },
+    { id: 'c13', label: 'The niche is a fitting, not a shrine — what Thursday is.', essential: true, act: 'Act Two — The File', fallback: 'Undelivered by 2:45: Rosalía says it in one speech (pass-2 fix pending: 2:35).' },
+    { id: 'c14', label: 'The village has known since 1811.', essential: true, act: 'Act Two — The File', fallback: 'Undelivered by 2:45: Rosalía says it in one speech (pass-2 fix pending: 2:35).' },
+    { id: 'c15', label: 'Rosalía wants it put back — the argument is not Germans vs party.', essential: true, act: 'Act Two — The File', fallback: 'Undelivered by 2:45: Rosalía says it in one speech (pass-2 fix pending: 2:35).' },
+    { id: 'c16', label: 'Sant Grau’s list — forty-one names (H4); read in the Epilogue.', essential: true, act: 'Act Two — The File' },
+    { id: 'c17', label: 'The reliquary does nothing for its holder — there is no prize.', essential: true, act: 'Act Two — The File', fallback: 'Ritter says so plainly.' },
+    { id: 'c18', label: 'Thursday’s order of march, confirmed (H5) — the clock.', essential: true, act: 'Act Two — The File', fallback: 'Degen will complain.' },
+  ],
+  cast: [
+    { id: 'dr-albrecht-ritter', name: 'Dr Albrecht Ritter', kind: 'npc', note: 'Ahnenerbe scholar; correct about every fact, sincere, delighted to meet someone who can read', secret: 'Killable — and the restoration still happens Thursday under Degen. Translates his own refutation aloud and files it.' },
+    { id: 'rosalia-benach', name: 'Rosalía Benach', kind: 'npc', note: 'wants the reliquary back in the niche, for the opposite reason to Ritter’s', secret: 'Will not explain herself twice. Fallback speech for the niche, the reverse, 1811 and her wish. At the niche at first light.' },
+    { id: 'hauptmann-degen', name: 'Hauptmann Degen', kind: 'npc', note: 'wants to be out of Spain by November; does not care what is in the crate', secret: 'If Ritter dies: “The doctor had a schedule. I have the schedule.” Wants twenty minutes and the crate, not a firefight.' },
+    { id: 'fr-emili-nogues', name: 'Fr Emili Nogués', kind: 'npc', note: 'no parish left; wants someone with a vehicle to look at a photograph' },
+    { id: 'hilaire-fournel', name: 'Hilaire Fournel', kind: 'npc', note: 'd. 1823 — had no form for what he was doing, so used the wrong one and wrote the truth on the back' },
+    { id: 'the-niche', name: 'The niche', kind: 'npc', note: 'a fitting, not a shrine; empty since 1811', secret: 'If opened: three effects only (engines stop, light wrong, everyone turns up-valley), then cut. Never statted, fought or depicted.' },
+    { id: 'dr-alicia-comes', name: 'Dr Alícia Comes', kind: 'pc', note: 'signing Spain’s art out of Spain for two years; a German with a better file has made her wonder what the difference is' },
+    { id: 'baltasar-tasar-roig', name: 'Baltasar “Tasar” Roig', kind: 'pc', note: 'has run the Pyrenees route since ’36; knows to the peseta what the crate is worth in rifles' },
+    { id: 'serafin-quiros', name: 'Serafín Quirós', kind: 'pc', note: 'twenty-six years taking rock out of the ground; the one who can make the question stop being a question' },
+    { id: 'nuria-benach', name: 'Nuria Benach', kind: 'pc', note: 'from Sant Grau; has just worked out her grandmother has lied to her for nineteen years about why', secret: 'Rosalía’s granddaughter — if at the table, Rosalía talks to her, not the party.' },
+    { id: 'capt-dermot-hale', name: 'Capt. Dermot Hale', kind: 'pc', note: 'flown cargo for four governments, never asked what was in it — and this paperwork is better than his ever was (dropped at four)' },
+    { id: 'konrad-weiss', name: 'Konrad Weiss', kind: 'pc', note: 'crated it in Vienna in 1932 and signed the docket that is in the file' },
+  ],
+  props: [],
+};

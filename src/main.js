@@ -1,13 +1,13 @@
 // Boot entry.
 import './components/gm-shell.js';
-import continuum2026 from './con/continuum-2026.js';
+import contingency2027 from './con/contingency-2027.js';
 
 export const APP = 'the-director';
 
 if (typeof document !== 'undefined' && document.querySelector('gm-shell')) {
   customElements.whenDefined('gm-shell').then(() => {
     const shell = document.querySelector('gm-shell');
-    shell.loadCon(continuum2026);
+    shell.loadCon(contingency2027);
   });
 }
 
