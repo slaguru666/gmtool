@@ -3,7 +3,7 @@
 // PC names from characters/continuous-service-pregens.md. Agenda hand-outs (0:05, 1:15, ~2:00, 2:40) folded into beats.
 // Vos and Banks are NPCs that become playable on a PC death; kept as kind 'npc'.
 export default {
-  meta: { id: 'continuous-service', title: 'CONTINUOUS SERVICE', system: 'year-zero', players: '4–6', playMinutes: 210, slot: 'Thu · Slot 5' },
+  meta: { id: 'continuous-service', title: 'CONTINUOUS SERVICE', system: 'alien', players: '4–6', playMinutes: 210, slot: 'Thu · Slot 5' },
   timeline: [
     { id: 'intro',      act: 0, label: 'Intro done — safety + lethality line, pregens dealt, every public agenda half said aloud, contract briefing', targetMin: 15, notes: 'Act One agendas out face down at 0:05, during Slot Zero' },
     { id: 'first-door', act: 1, label: 'First contact — a door cycles and locks, forward; no creature, nothing seen', targetMin: 50, notes: 'At about 0:50, not before' },

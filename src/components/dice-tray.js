@@ -1,5 +1,5 @@
 import { rollPool } from '../dice/roller.js';
-import { getRulePack, listRulePacks } from '../dice/rulepacks/index.js';
+import { trayPack, listRulePacks } from '../dice/rulepacks/index.js';
 
 const DICE = [4, 6, 8, 10, 12, 20, 100];
 
@@ -23,7 +23,7 @@ export class DiceTray extends HTMLElement {
   connectedCallback() { this.render(); this.syncParams(); }
 
   syncParams() {
-    const pack = getRulePack(this._systemId);
+    const pack = trayPack(this._systemId);
     const next = {};
     if (pack && pack.params) {
       for (const p of pack.params) {
@@ -37,7 +37,7 @@ export class DiceTray extends HTMLElement {
 
   roll() {
     const { results, total } = rollPool([{ sides: this._sides, count: this._count }], this.rng);
-    const pack = getRulePack(this._systemId);
+    const pack = trayPack(this._systemId);
     const verdict = pack ? pack.interpret(results, this.params) : null;
     this.last = { results, total, verdict };
     this.render();
@@ -50,15 +50,15 @@ export class DiceTray extends HTMLElement {
     const felt = this.last
       ? this.last.results.map((r) => `<span class="rolled" data-value="${r.value}">${r.value}</span>`).join('')
       : '<span class="hint">Tap Roll</span>';
-    const pack = getRulePack(this._systemId);
+    const pack = trayPack(this._systemId);
     const verdict = this.last?.verdict
       ? (pack && pack.summary ? pack.summary(this.last.verdict) : '')
       : '';
 
-    const packs = listRulePacks();
+    const packs = listRulePacks({ tray: true });
     const packBar = [{ id: '', label: 'Any die' }, ...packs].map((p) =>
       `<button class="pack ${p.id === this._systemId ? 'on' : ''}" data-pack-id="${p.id}">${p.label}</button>`).join('');
-    const active = getRulePack(this._systemId);
+    const active = trayPack(this._systemId);
     const paramInputs = (active && active.params ? active.params : []).map((p) =>
       `<label class="param">${p.label}<input type="number" data-param="${p.key}" value="${this.params[p.key] ?? p.default}" /></label>`).join('');
 

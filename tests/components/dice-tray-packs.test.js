@@ -44,3 +44,17 @@ describe('<dice-tray> pack selector + params', () => {
     expect(el.querySelector('[data-role=verdict]').textContent).toBe('');
   });
 });
+
+describe('<dice-tray> and device-only packs', () => {
+  it('does not offer the ALIEN pack and reads an alien scenario as year-zero', () => {
+    document.body.innerHTML = '';
+    const el = document.createElement('dice-tray');
+    document.body.appendChild(el);
+    expect(el.querySelector('[data-pack-id="alien"]')).toBe(null);
+    el.systemId = 'alien';
+    el.sides = 10; el.count = 1;
+    el.rng = () => 0.95; // d10 -> 10: two Year Zero successes
+    el.roll();
+    expect(el.last.verdict.successes).toBe(2);
+  });
+});

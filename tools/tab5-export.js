@@ -28,6 +28,21 @@ function goldenInputs() {
   for (const pool of VANITY_POOLS) for (const difficulty of [0, 1, 2, 3]) {
     cases.push({ pack: 'vanity-d6', sides: 6, values: pool, params: { difficulty } });
   }
+  // Mixed die sizes (Blade Runner: attribute + skill die). `dice` replaces sides/values.
+  for (const sizes of [[10, 8], [12, 6], [8, 8, 6]]) {
+    for (const vals of [[10, 6, 1], [1, 9, 6], [12, 5, 2]]) {
+      cases.push({ pack: 'year-zero', dice: sizes.map((sides, i) => ({ sides, value: Math.min(vals[i], sides), stress: false })), params: {} });
+    }
+  }
+  // ALIEN: base d6 + stress d6.
+  const ALIEN_POOLS = [
+    { base: [6, 1], stress: [1] }, { base: [2, 3], stress: [2] }, { base: [6, 6], stress: [6] },
+    { base: [], stress: [6, 1] }, { base: [1], stress: [] },
+  ];
+  for (const { base, stress } of ALIEN_POOLS) {
+    const dice = [...base.map((value) => ({ sides: 6, value, stress: false })), ...stress.map((value) => ({ sides: 6, value, stress: true }))];
+    cases.push({ pack: 'alien', dice, params: { stress: stress.length } });
+  }
   return cases;
 }
 
@@ -40,7 +55,7 @@ function successOf(packId, v) {
 export function buildGoldenCases() {
   return goldenInputs().map((c) => {
     const pack = getRulePack(c.pack);
-    const results = c.values.map((value) => ({ sides: c.sides, value }));
+    const results = c.dice ? c.dice.map((d) => ({ ...d })) : c.values.map((value) => ({ sides: c.sides, value }));
     const v = pack.interpret(results, c.params);
     return {
       ...c,

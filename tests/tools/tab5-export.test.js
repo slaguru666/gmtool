@@ -40,3 +40,18 @@ describe('buildTab5Export', () => {
     expect(c.detail.startsWith('−1D10 SAN')).toBe(true);
   });
 });
+
+describe('mixed-pool and stress golden cases', () => {
+  it('has year-zero cases mixing die sizes', () => {
+    const mixed = golden.filter((c) => c.pack === 'year-zero' && c.dice && new Set(c.dice.map((d) => d.sides)).size > 1);
+    expect(mixed.length).toBeGreaterThan(0);
+    expect(mixed.some((c) => c.dice[0].sides === 10 && c.dice[1].sides === 8)).toBe(true);
+  });
+
+  it('has alien cases with a stress 1 (panic) and without', () => {
+    const al = golden.filter((c) => c.pack === 'alien');
+    expect(al.some((c) => c.dice.some((d) => d.stress && d.value === 1) && c.canPush === false)).toBe(true);
+    expect(al.some((c) => c.canPush === true)).toBe(true);
+    expect(al.every((c) => !('values' in c))).toBe(true);
+  });
+});
